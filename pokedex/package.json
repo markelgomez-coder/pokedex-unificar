@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "bunx live-server --port=3000",
+    "dev": "vite",
     "test": "vitest",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
