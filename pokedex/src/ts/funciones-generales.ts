@@ -4,13 +4,7 @@ import * as funcionesStorage from "./storage-funciones.js";
 import * as mostrarHTML from "./mostrar-html.js";
 import * as funcionesPokedex from "./pokedex.js";
 
-import type {
-  EvolutionNode,
-  FlavorTextEntry,
-  Pokemon,
-  TipoPokemon,
-  DanoPokemon,
-} from "./tipos";
+import type { Pokemon } from "./tipos";
 
 export async function setPokemonsPokedex() {
   let pokemonsGuardados: Array<Pokemon> = [];

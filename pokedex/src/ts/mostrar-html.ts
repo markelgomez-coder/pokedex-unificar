@@ -1,6 +1,6 @@
 import * as funcionesGenerales from "./funciones-generales.js";
 
-import { Pokemon } from "./tipos";
+import type { Pokemon } from "./tipos";
 
 export function mostrarPokemon(pokemon: Pokemon, dreamTeam: boolean) {
   const htmlDreamTeam = `
