@@ -51,6 +51,7 @@ nav {
 nav a {
   font-size: var(--font-size-mobile-link);
   color: var(--color-brand-900);
+  cursor: pointer;
 }
 
 nav a:hover {

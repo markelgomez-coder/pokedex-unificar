@@ -29,9 +29,9 @@ function App() {
           <h1>Pokedex</h1>
         </div>
         <nav>
-          <button onClick={() => setCurrentView("home")}>Home</button>
-          <button onClick={() => setCurrentView("pokedex")}>Pokedex</button>
-          <button onClick={() => setCurrentView("dream-team")}>Dream Team</button>
+          <a onClick={() => setCurrentView("home")}>Home</a>
+          <a onClick={() => setCurrentView("pokedex")}>Pokedex</a>
+          <a onClick={() => setCurrentView("dream-team")}>Dream Team</a>
         </nav>
       </header>
       <main>{renderMainContent()}</main>
