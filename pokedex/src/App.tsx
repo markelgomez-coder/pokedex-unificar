@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./css/variables.css";
 import "./css/static.css";
 import "./css/iconos.css";
-import Pokeball from "./iconos/pokeball";
+import Pokeball from "./iconos/Pokeball";
 import Pokedex from "./vistas/Pokedex";
 import DreamTeam from "./vistas/DreamTeam";
 import Home from "./vistas/Home";
