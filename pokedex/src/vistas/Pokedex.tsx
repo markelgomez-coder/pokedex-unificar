@@ -1,3 +1,5 @@
+import "../css/pokedex.css";
+
 function Pokedex() {
   return (
     <>
