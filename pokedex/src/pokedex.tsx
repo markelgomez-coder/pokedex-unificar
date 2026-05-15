@@ -43,6 +43,7 @@ function pokedex() {
       <footer>
         <p>© 2026 Markel Gomez. All rights reserved.</p>
       </footer>
+      <script type="module" src="dist/ts/pokedex.js"></script>
     </>
   );
 }
