@@ -6,6 +6,7 @@ import Pokeball from "./iconos/pokeball";
 import Pokedex from "./vistas/Pokedex";
 import DreamTeam from "./vistas/DreamTeam";
 import Home from "./vistas/Home";
+import Panel_Pokemon from "./vistas/Panel_Pokemon";
 
 function App() {
   const [currentView, setCurrentView] = useState("home");
@@ -18,6 +19,8 @@ function App() {
         return <DreamTeam />;
       case "home":
         return <Home />;
+      case "panel-pokemon":
+        return <Panel_Pokemon />;
     }
   };
 
