@@ -1,3 +1,5 @@
+import "../css/dream-team.css";
+
 function DreamTeam() {
   return (
     <>
