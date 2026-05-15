@@ -1,4 +1,5 @@
 import "../css/pokedex.css";
+import CartaPokemonVacia from "../componentes/CartaPokemonVacia";
 
 function Pokedex() {
   return (
@@ -16,7 +17,9 @@ function Pokedex() {
           />
         </form>
       </div>
-      <section id="resultado-busqueda"></section>
+      <section id="resultado-busqueda">
+        <CartaPokemonVacia />
+      </section>
     </>
   );
 }

@@ -2,7 +2,6 @@ import * as funcionesGenerales from "./funciones-generales.js";
 import * as datosGenerales from "./datos-generales.js";
 import * as funcionesStorage from "./storage-funciones.js";
 import * as mostrarHTML from "./mostrar-html.js";
-import * as funcionesPokedex from "./pokedex.js";
 import * as funcionesDreamTeam from "./dream-team.js";
 let timeoutId = null;
 if (window.location.pathname.endsWith("pokedex.html")) {
@@ -24,7 +23,7 @@ document.addEventListener("keyup", (e) => {
                 const value = target.value;
                 if (value === "") {
                     funcionesGenerales.vaciarHtmlConId("resultado-busqueda");
-                    funcionesPokedex.ensenarCartas(datosGenerales.listaPokemon);
+                    ensenarCartas(datosGenerales.listaPokemon);
                 }
                 else {
                     const tipoDato = funcionesGenerales.sacarTipoDato(value);
@@ -52,7 +51,7 @@ export function filtraPorTipo(value) {
             filtrados.push(pokemon);
         }
     });
-    funcionesPokedex.ensenarCartas(filtrados);
+    ensenarCartas(filtrados);
     return filtrados;
 }
 export function filtraPorNumero(value) {
@@ -75,7 +74,7 @@ export function filtraPorNombre(value) {
             filtrados.push(pokemon);
         }
     });
-    funcionesPokedex.ensenarCartas(filtrados);
+    ensenarCartas(filtrados);
     return filtrados;
 }
 export function ensenarCartas(pokemons) {
