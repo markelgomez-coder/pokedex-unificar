@@ -24,6 +24,18 @@ function App() {
     }
   };
 
+  const renderJS = () => {
+    switch (currentView) {
+      case "pokedex":
+        return <script type="module" src="./js/src/ts/pokedex.js"></script>;
+      case "dream-team":
+        return <script type="module" src="./js/src/ts/dream-team.js"></script>;
+      case "home":
+        return;
+      case "panel-pokemon":
+        return <script type="module" src="./js/src/ts/panel-pokemon.js"></script>;
+    }
+  };
   return (
     <>
       <header>
@@ -41,6 +53,7 @@ function App() {
       <footer>
         <p>© 2026 Markel Gomez. All rights reserved.</p>
       </footer>
+      {renderJS()}
     </>
   );
 }
