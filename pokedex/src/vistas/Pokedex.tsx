@@ -1,45 +1,39 @@
 import "../css/pokedex.css";
 import "../css/variables.css";
 import "../css/static.css";
-import * as funcionesAPI from "../js/src/ts/funciones-API";
+
+import { useState } from "react";
+
+import ErrorAPI from "../componentes/ErrorAPI";
+import NoHayResultado from "../componentes/NoHayResultado";
 import CartaPokemonVacia from "../componentes/CartaPokemonVacia";
-import CartaPokemon from "../componentes/CartaPokemon";
-import { useEffect, useState } from "react";
-import type { Pokemon } from "../ts/tipos";
 
 function Pokedex() {
-
-  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [busqueda, setBusqueda] = useState("");
+  const [cartasPuestas, setCartas] = useState("cargando");
 
-  useEffect(() => {
-    async function cargarPokemon() {
-      const data = await funcionesAPI.obtenerPokemon(1);
-      setPokemon(data);
+  const renderCartas = () => {
+    switch (cartasPuestas) {
+      case "cargando":
+        return mostrarCartasVacias();
+
+      case "pokemon":
+        return mostrarPokemon();
+
+      case "no hay resultado":
+        return <NoHayResultado busqueda={busqueda} />;
+
+      case "error API":
+        return <ErrorAPI />;
+
+      default:
+        return null;
     }
-
-    cargarPokemon();
-  }, []);
-
-  useEffect(() => {
-
-    const timeout = setTimeout(async () => {
-
-      if (busqueda.trim() !== "") {
-        const data = await funcionesAPI.obtenerPokemon(busqueda);
-        setPokemon(data);
-      }
-
-    }, 500);
-
-    return () => clearTimeout(timeout);
-
-  }, [busqueda]);
+  };
 
   return (
     <>
       <div className="buscador">
-
         <div className="lupa-icono">
           <div className="lupa-icono-circulo"></div>
           <div className="lupa-icono-linea"></div>
@@ -51,26 +45,35 @@ function Pokedex() {
             id="input-busqueda"
             placeholder="Search Pokémon..."
             value={busqueda}
-            onChange={(e) => setBusqueda(e.target.value)}
+            onChange={(e) => {
+              setBusqueda(e.target.value);
+
+              if (e.target.value === "") {
+                setCartas("cargando");
+              } else {
+                setCartas("pokemon");
+              }
+            }}
           />
         </form>
-
       </div>
-
-      <section id="resultado-busqueda">
-
-        <CartaPokemonVacia />
-
-        {pokemon && (
-          <CartaPokemon
-            pokemon={pokemon}
-            dreamTeam={true}
-          />
-        )}
-
-      </section>
+      <section id="resultado-busqueda">{renderCartas()}</section>
     </>
   );
+}
+
+function mostrarCartasVacias() {
+  const cartas = [];
+
+  for (let i = 0; i < 9; i++) {
+    cartas.push(<CartaPokemonVacia key={i} />);
+  }
+
+  return cartas;
+}
+
+function mostrarPokemon() {
+  return <h2>Pokémon cargados</h2>;
 }
 
 export default Pokedex;

@@ -126,7 +126,7 @@ export function mostrarNoHayResultado() {
   const container = document.getElementById("resultado-busqueda");
   const input = document.getElementById("input-busqueda") as HTMLInputElement;
 
-  let htmlNoHayResultado = `
+  const htmlNoHayResultado = `
     <div class="no-hay-resultado">
       <div class="icono-no-hay-resultado">
         <div class="icono-no-hay-resultado-interior"></div>
