@@ -1,4 +1,6 @@
 import * as funcionesGenerales from "../js/src/ts/funciones-generales.js";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
 import "../css/pokedex.css";
 import "../css/variables.css";
 
@@ -20,7 +22,7 @@ function CartaPokemon({ pokemon, dreamTeam }) {
   };
 
   return (
-    <article className={`carta-pokemon ${pokemon.tipos[0]}`}>
+    <Link to={`/panel-pokemon/${pokemon.numero}`} className={`carta-pokemon ${pokemon.tipos[0]}`}>
       <header>
         <p className="pokemon-name">{primeraMayusculas(pokemon.nombre)}</p>
 
@@ -84,7 +86,7 @@ function CartaPokemon({ pokemon, dreamTeam }) {
           ))}
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
 
