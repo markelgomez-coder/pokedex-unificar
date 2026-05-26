@@ -56,7 +56,7 @@ async function obtenerGeneracion(id: number) {
   try {
     for (
       let i = pokemonsAnteriores;
-      i <=
+      i <
       pokemonsAnteriores + datosGenerales.generaciones[id - 1].cantidadPokemon;
       i++
     ) {
