@@ -1,56 +1,24 @@
 import * as funcionesGenerales from "./funciones-generales.js";
 import * as datosGenerales from "./datos-generales.js";
-import * as funcionesStorage from "./storage-funciones.js";
-import * as mostrarHTML from "./mostrar-html.js";
-import * as funcionesPokedex from "./pokedex.js";
 import * as funcionesDreamTeam from "./dream-team.js";
 
 import type { Pokemon } from "./tipos";
 
-let timeoutId: ReturnType<typeof window.setTimeout> | null = null;
-
-if (window.location.pathname.endsWith("pokedex.html")) {
-  main();
-}
-
-function main() {
-  mostrarHTML.mostrarCartasVacias();
-  funcionesGenerales.setPokemonsPokedex();
-}
-
-document.addEventListener("keyup", (e) => {
-  const container = document.getElementById("resultado-busqueda");
-  const target = e.target as HTMLInputElement;
-  if (target != null && container != null) {
-    if (timeoutId !== null) {
-      clearTimeout(timeoutId);
+export function filtrarPokemons(value: string) {
+  if (value === "") {
+    return datosGenerales.listaPokemon;
+  } else {
+    const tipoDato = funcionesGenerales.sacarTipoDato(value);
+    switch (tipoDato) {
+      case "tipo":
+        return filtraPorTipo(value);
+      case "numero":
+        return filtraPorNumero(value);
+      case "nombre":
+        return filtraPorNombre(value);
     }
-    timeoutId = setTimeout(() => {
-      if (target.matches("#input-busqueda")) {
-        const value = target.value;
-
-        if (value === "") {
-          funcionesGenerales.vaciarHtmlConId("resultado-busqueda");
-          funcionesPokedex.ensenarCartas(datosGenerales.listaPokemon);
-        } else {
-          const tipoDato = funcionesGenerales.sacarTipoDato(value);
-          funcionesGenerales.vaciarHtmlConId("resultado-busqueda");
-          switch (tipoDato) {
-            case "tipo":
-              filtraPorTipo(value);
-              break;
-            case "numero":
-              filtraPorNumero(value);
-              break;
-            case "nombre":
-              filtraPorNombre(value);
-              break;
-          }
-        }
-      }
-    }, 1000);
   }
-});
+}
 
 export function filtraPorTipo(value: string) {
   const filtrados: Array<Pokemon> = [];
@@ -59,7 +27,6 @@ export function filtraPorTipo(value: string) {
       filtrados.push(pokemon);
     }
   });
-  funcionesPokedex.ensenarCartas(filtrados);
   return filtrados;
 }
 
@@ -73,7 +40,6 @@ export function filtraPorNumero(value: string) {
       filtrados.push(pokemon);
     }
   });
-  ensenarCartas(filtrados);
   return filtrados;
 }
 
@@ -84,27 +50,7 @@ export function filtraPorNombre(value: string) {
       filtrados.push(pokemon);
     }
   });
-  funcionesPokedex.ensenarCartas(filtrados);
   return filtrados;
-}
-
-export function ensenarCartas(pokemons: Array<Pokemon>) {
-  funcionesStorage.cargarDreamTeamDesdeStorage();
-  let html = "";
-  const container = document.getElementById("resultado-busqueda");
-  let gogokoa = false;
-  if (pokemons.length === 0) {
-    mostrarHTML.mostrarNoHayResultado();
-  } else {
-    pokemons.forEach((pokemon) => {
-      if (datosGenerales.dreamTeam.includes(pokemon)) gogokoa = true;
-      html += mostrarHTML.mostrarPokemon(pokemon, gogokoa);
-      gogokoa = false;
-    });
-    if (container != null) {
-      funcionesGenerales.meterAlHtmlConId("resultado-busqueda", html);
-    }
-  }
 }
 
 document.addEventListener("click", (e) => {

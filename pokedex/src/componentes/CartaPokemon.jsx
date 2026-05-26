@@ -6,16 +6,23 @@ function CartaPokemon({ pokemon, dreamTeam }) {
   const primeraMayusculas = (texto) =>
     texto.charAt(0).toUpperCase() + texto.slice(1);
 
+  const stats = [
+    { nombre: "HP", valor: pokemon.hp },
+    { nombre: "ATK", valor: pokemon.atk },
+    { nombre: "DEF", valor: pokemon.def },
+    { nombre: "SAT", valor: pokemon.sat },
+    { nombre: "SDF", valor: pokemon.sdf },
+    { nombre: "SPD", valor: pokemon.spd },
+  ];
+
   const calcularBarraPintada = (valor) => {
     return `${270 * (valor / 255) - 16}px`;
   };
 
   return (
-    <a className={`carta-pokemon ${pokemon.tipos[0]}`}>
+    <article className={`carta-pokemon ${pokemon.tipos[0]}`}>
       <header>
-        <p className="pokemon-name">
-          {primeraMayusculas(pokemon.nombre)}
-        </p>
+        <p className="pokemon-name">{primeraMayusculas(pokemon.nombre)}</p>
 
         <p className="pokemon-number">
           {funcionesGenerales.formatearNumero(pokemon.numero)}
@@ -44,9 +51,7 @@ function CartaPokemon({ pokemon, dreamTeam }) {
         <div className="tipo-pokemon">
           {pokemon.tipos.map((tipo) => (
             <div key={tipo} className={`icono-tipo ${tipo}`}>
-              <p className="texto-tipo">
-                {primeraMayusculas(tipo)}
-              </p>
+              <p className="texto-tipo">{primeraMayusculas(tipo)}</p>
             </div>
           ))}
         </div>
@@ -62,94 +67,24 @@ function CartaPokemon({ pokemon, dreamTeam }) {
         </div>
 
         <div className="estadisticas-pokemon">
+          {stats.map((stat) => (
+            <div key={stat.nombre} className="estadistica">
+              <div className="estadistica-datos">
+                <p className="estadistica-nombre">{stat.nombre}</p>
+                <p className="estadistica-valor">{stat.valor}</p>
+              </div>
 
-          <div className="estadistica">
-            <div className="estadistica-datos">
-              <p className="estadistica-nombre">HP</p>
-              <p className="estadistica-valor">{pokemon.hp}</p>
+              <div className="barra-estadistica-total"></div>
+
+              <div
+                className="barra-estadistica-llena"
+                style={{ width: calcularBarraPintada(stat.valor) }}
+              ></div>
             </div>
-
-            <div className="barra-estadistica-total"></div>
-
-            <div
-              className="barra-estadistica-llena"
-              style={{ width: calcularBarraPintada(pokemon.hp) }}
-            ></div>
-          </div>
-
-          <div className="estadistica">
-            <div className="estadistica-datos">
-              <p className="estadistica-nombre">ATK</p>
-              <p className="estadistica-valor">{pokemon.atk}</p>
-            </div>
-
-            <div className="barra-estadistica-total"></div>
-
-            <div
-              className="barra-estadistica-llena"
-              style={{ width: calcularBarraPintada(pokemon.atk) }}
-            ></div>
-          </div>
-
-          <div className="estadistica">
-            <div className="estadistica-datos">
-              <p className="estadistica-nombre">DEF</p>
-              <p className="estadistica-valor">{pokemon.def}</p>
-            </div>
-
-            <div className="barra-estadistica-total"></div>
-
-            <div
-              className="barra-estadistica-llena"
-              style={{ width: calcularBarraPintada(pokemon.def) }}
-            ></div>
-          </div>
-
-          <div className="estadistica">
-            <div className="estadistica-datos">
-              <p className="estadistica-nombre">SAT</p>
-              <p className="estadistica-valor">{pokemon.sat}</p>
-            </div>
-
-            <div className="barra-estadistica-total"></div>
-
-            <div
-              className="barra-estadistica-llena"
-              style={{ width: calcularBarraPintada(pokemon.sat) }}
-            ></div>
-          </div>
-
-          <div className="estadistica">
-            <div className="estadistica-datos">
-              <p className="estadistica-nombre">SDF</p>
-              <p className="estadistica-valor">{pokemon.sdf}</p>
-            </div>
-
-            <div className="barra-estadistica-total"></div>
-
-            <div
-              className="barra-estadistica-llena"
-              style={{ width: calcularBarraPintada(pokemon.sdf) }}
-            ></div>
-          </div>
-
-          <div className="estadistica">
-            <div className="estadistica-datos">
-              <p className="estadistica-nombre">SPD</p>
-              <p className="estadistica-valor">{pokemon.spd}</p>
-            </div>
-
-            <div className="barra-estadistica-total"></div>
-
-            <div
-              className="barra-estadistica-llena"
-              style={{ width: calcularBarraPintada(pokemon.spd) }}
-            ></div>
-          </div>
-
+          ))}
         </div>
       </div>
-    </a>
+    </article>
   );
 }
 

@@ -1,8 +1,6 @@
 import * as datosGenerales from "./datos-generales.js";
 import * as funcionesAPI from "./funciones-API.js";
 import * as funcionesStorage from "./storage-funciones.js";
-import * as mostrarHTML from "./mostrar-html.js";
-import * as funcionesPokedex from "./pokedex.js";
 
 import type { Pokemon } from "./tipos";
 
@@ -14,8 +12,6 @@ export async function setPokemonsPokedex() {
     pokemonsGuardados.push(...(await obtenerGeneracion(i)));
     datosGenerales.listaPokemon.push(...pokemonsGuardados);
     funcionesStorage.cargarDreamTeamDesdeStorage();
-    if (i === 1) vaciarHtmlConId("resultado-busqueda");
-    funcionesPokedex.ensenarCartas(pokemonsGuardados);
     pokemonsGuardados = [];
   }
 
@@ -37,7 +33,7 @@ export async function setPokemonsDreamTeam() {
 
 async function obtenerGeneracion(id: number) {
   const promesas = [];
-  let pokemonsAnteriores: number = sacarPokemonsAnteriores(id);
+  const pokemonsAnteriores: number = sacarPokemonsAnteriores(id);
   try {
     for (
       let i = pokemonsAnteriores;
@@ -52,9 +48,8 @@ async function obtenerGeneracion(id: number) {
 
     return pokemons;
   } catch (error) {
-    vaciarHtmlConId("resultado-busqueda");
-    mostrarHTML.mostrarErrorAPI();
-    return [];
+    console.error(error);
+    return [1 as unknown as Pokemon];
   }
 }
 
@@ -116,7 +111,10 @@ export function formatearNumero(numero: number) {
   }
   return "#" + numero;
 }
-export function sacarPokemonDeListaConElNombre(nombre:string, lista: Array<Pokemon>) {
+export function sacarPokemonDeListaConElNombre(
+  nombre: string,
+  lista: Array<Pokemon>,
+) {
   return lista.find((p) => p.nombre === nombre);
 }
 export function pokemonDentroDeLaLista(

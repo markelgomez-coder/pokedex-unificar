@@ -1,4 +1,4 @@
-function CartaPokemon(pokemon, dreamTeam) {
+function CartaPokemonVacia(pokemon, dreamTeam) {
   return(
   <>
     <div className="carta-pokemon-vacia">
@@ -14,4 +14,4 @@ function CartaPokemon(pokemon, dreamTeam) {
   </>);
 }
 
-export default CartaPokemon;
+export default CartaPokemonVacia;
