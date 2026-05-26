@@ -2,7 +2,26 @@ import * as datosGenerales from "./datos-generales.js";
 import * as funcionesAPI from "./funciones-API.js";
 import * as funcionesStorage from "./storage-funciones.js";
 
-import type { Pokemon } from "./tipos";
+import type { Pokemon, PokemonAPI, PokemonListResponse } from "./tipos";
+
+export async function obtenerTodosLosPokemons() {
+  const response = await fetch(
+    "https://pokeapi.co/api/v2/pokemon?limit=1302"
+  );
+
+  const data: PokemonListResponse = await response.json();
+
+  const resultados = await Promise.allSettled(
+    data.results.map(async (pokemon: PokemonAPI) => {
+      const res = await fetch(pokemon.url);
+      return await res.json();
+    })
+  );
+
+  return resultados
+    .filter((r) => r.status === "fulfilled")
+    .map((r) => (r as PromiseFulfilledResult<Pokemon>).value);
+}
 
 export async function setPokemonsPokedex() {
   let pokemonsGuardados: Array<Pokemon> = [];

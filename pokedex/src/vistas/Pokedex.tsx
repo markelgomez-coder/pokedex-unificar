@@ -18,7 +18,7 @@ function Pokedex() {
 
   useEffect(() => {
     const loadPokemons = async () => {
-      await funcionesGenerales.setPokemonsPokedex();
+      await funcionesGenerales.obtenerTodosLosPokemons();
     };
 
     loadPokemons();

@@ -14,6 +14,15 @@ export type Pokemon = {
     dream_team:boolean,
 }
 
+export type PokemonAPI = {
+  name: string;
+  url: string;
+};
+
+export type PokemonListResponse = {
+  results: PokemonAPI[];
+};
+
 export type Type = {
     name: string,  
     url: string,   
@@ -48,3 +57,4 @@ export type FlavorTextEntry = {
     url: string;
   };
 };
+
