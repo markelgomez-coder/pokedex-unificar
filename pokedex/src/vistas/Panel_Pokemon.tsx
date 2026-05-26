@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "../css/panel-pokemon.css";
 import "../css/variables.css";
 import "../css/static.css";
@@ -12,6 +13,8 @@ import CartaPokemon from "../componentes/CartaPokemon";
 type DanoPokemon = { name: string };
 
 function Panel_Pokemon() {
+  const { id } = useParams();
+
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [descripcion, setDescripcion] = useState("");
   const [dobleDano, setDobleDano] = useState<DanoPokemon[]>([]);
@@ -21,14 +24,10 @@ function Panel_Pokemon() {
   const [gogokoa, setGogokoa] = useState(false);
 
   useEffect(() => {
-    const numeroPokemon = new URLSearchParams(window.location.search).get(
-      "pokemon"
-    );
-
-    if (!numeroPokemon) return;
+    if (!id) return;
 
     const cargarDatos = async () => {
-      const poke = await funcionesAPI.obtenerPokemon(numeroPokemon);
+      const poke = await funcionesAPI.obtenerPokemon(id);
 
       await funcionesGenerales.setPokemonsDreamTeam();
 
@@ -47,11 +46,11 @@ function Panel_Pokemon() {
         none,
         evolucionesLink,
       ] = await Promise.all([
-        funcionesAPI.obtenerPokemonDescripcion(numeroPokemon),
-        funcionesAPI.obtenerDebilidadPokemon(numeroPokemon),
-        funcionesAPI.obtenerResistenciaPokemon(numeroPokemon),
-        funcionesAPI.obtenerInmunidadPokemon(numeroPokemon),
-        funcionesAPI.obtenerPokemonEvolucionesLink(numeroPokemon),
+        funcionesAPI.obtenerPokemonDescripcion(id),
+        funcionesAPI.obtenerDebilidadPokemon(id),
+        funcionesAPI.obtenerResistenciaPokemon(id),
+        funcionesAPI.obtenerInmunidadPokemon(id),
+        funcionesAPI.obtenerPokemonEvolucionesLink(id),
       ]);
 
       const evolucionBase =
@@ -71,7 +70,7 @@ function Panel_Pokemon() {
     };
 
     cargarDatos();
-  }, []);
+  }, [id]);
 
   const renderDano = (lista: DanoPokemon[]) =>
     lista.map((d) => (
@@ -103,7 +102,7 @@ function Panel_Pokemon() {
                 <a
                   key={evo.nombre}
                   className="evolucion-pokemon"
-                  href={`panel-pokemon.html?pokemon=${evo.nombre}`}
+                  href={`/panel-pokemon/${evo.nombre}`}
                 >
                   <img src={evo.imagen} />
                   <p className="evolucion-pokemon-nombre">
