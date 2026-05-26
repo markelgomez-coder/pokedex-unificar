@@ -1,41 +1,17 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
 import "./css/variables.css";
 import "./css/static.css";
 import "./css/iconos.css";
+
 import Pokeball from "./iconos/Pokeball";
+
+import Home from "./vistas/Home";
 import Pokedex from "./vistas/Pokedex";
 import DreamTeam from "./vistas/DreamTeam";
-import Home from "./vistas/Home";
 import Panel_Pokemon from "./vistas/Panel_Pokemon";
 
-function App() {
-  const [currentView, setCurrentView] = useState("home");
-
-  const renderMainContent = () => {
-    switch (currentView) {
-      case "pokedex":
-        return <Pokedex />;
-      case "dream-team":
-        return <DreamTeam />;
-      case "home":
-        return <Home />;
-      case "panel-pokemon":
-        return <Panel_Pokemon />;
-    }
-  };
-
-  const renderJS = () => {
-    switch (currentView) {
-      case "pokedex":
-        return <script type="module" src="./js/src/ts/pokedex.js"></script>;
-      case "dream-team":
-        return <script type="module" src="./js/src/ts/dream-team.js"></script>;
-      case "home":
-        return;
-      case "panel-pokemon":
-        return <script type="module" src="./js/src/ts/panel-pokemon.js"></script>;
-    }
-  };
+function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <header>
@@ -43,18 +19,35 @@ function App() {
           <Pokeball />
           <h1>Pokedex</h1>
         </div>
+
         <nav>
-          <a onClick={() => setCurrentView("home")}>Home</a>
-          <a onClick={() => setCurrentView("pokedex")}>Pokedex</a>
-          <a onClick={() => setCurrentView("dream-team")}>Dream Team</a>
+          <Link to="/">Home</Link>
+          <Link to="/pokedex">Pokedex</Link>
+          <Link to="/dream-team">Dream Team</Link>
         </nav>
       </header>
-      <main>{renderMainContent()}</main>
+
+      <main>{children}</main>
+
       <footer>
         <p>© 2026 Markel Gomez. All rights reserved.</p>
       </footer>
-      {renderJS()}
     </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/pokedex" element={<Pokedex />} />
+          <Route path="/dream-team" element={<DreamTeam />} />
+          <Route path="/panel-pokemon/:id" element={<Panel_Pokemon />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 }
 
