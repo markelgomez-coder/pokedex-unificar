@@ -58,7 +58,7 @@ export function quitarRepetidosListaPokemon(){
 export const DREAM_TEAM_STORAGE_KEY = "dreamTeam";
 
 export let dreamTeam: Array<Pokemon> = [];
-export let maxDreamTeam: number = 6;
+export const maxDreamTeam: number = 6;
 
 export function VaciarDreamTeam() {
   dreamTeam = [];
