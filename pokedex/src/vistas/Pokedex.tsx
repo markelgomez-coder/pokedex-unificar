@@ -9,6 +9,7 @@ import NoHayResultado from "../componentes/NoHayResultado";
 import CartaPokemonVacia from "../componentes/CartaPokemonVacia";
 import * as funcionesGenerales from "../ts/funciones-generales.js";
 import * as funcionesPokedex from "../ts/pokedex.js";
+import * as datosGenerales from "../ts/datos-generales.js";
 import CartaPokemon from "../componentes/CartaPokemon";
 
 import type { Pokemon } from "../ts/tipos";
@@ -90,7 +91,7 @@ function mostrarPokemons(busqueda: string, listaPokemon: Pokemon[]) {
     return <ErrorAPI />;
   }
 
-  if (PokemonsFiltrados.length === 0 && busqueda !== "") {
+  if (PokemonsFiltrados.length === 0 && busqueda !== "" && datosGenerales.listaPokemon.some((p) => p.nombre === busqueda)) {
     return <NoHayResultado busqueda={busqueda} />;
   }
 
