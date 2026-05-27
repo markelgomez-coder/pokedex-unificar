@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "../css/panel-pokemon.css";
 import "../css/variables.css";
 import "../css/static.css";
+import "../css/static.css";
+import "../css/pokedex.css";
+import "../css/panel-pokemon.css";
 
 import type { Pokemon } from "../ts/tipos";
 import * as funcionesAPI from "../ts/funciones-API.js";
 import * as funcionesGenerales from "../ts/funciones-generales.js";
-import * as datosGenerales from "../ts/datos-generales.js";
 import CartaPokemon from "../componentes/CartaPokemon";
 
 type DanoPokemon = { name: string };
@@ -21,7 +22,6 @@ function Panel_Pokemon() {
   const [mitadDano, setMitadDano] = useState<DanoPokemon[]>([]);
   const [noDano, setNoDano] = useState<DanoPokemon[]>([]);
   const [evoluciones, setEvoluciones] = useState<Pokemon[]>([]);
-  const [gogokoa, setGogokoa] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -31,13 +31,7 @@ function Panel_Pokemon() {
 
       await funcionesGenerales.setPokemonsDreamTeam();
 
-      const esFavorito = funcionesGenerales.pokemonDentroDeLaLista(
-        datosGenerales.dreamTeam,
-        poke
-      );
-
       setPokemon(poke);
-      setGogokoa(esFavorito);
 
       const [
         desc,
@@ -83,12 +77,7 @@ function Panel_Pokemon() {
     <div id="panel-pokemon">
       <div id="panel-pokemon-izquierda">
         {pokemon && (
-          <div>
             <CartaPokemon pokemon={pokemon} dreamTeam={pokemon.dream_team} />
-            <h2>{pokemon.nombre}</h2>
-            <img src={pokemon.imagen} alt={pokemon.nombre} />
-            {gogokoa && <span>⭐ Favorito</span>}
-          </div>
         )}
       </div>
       <div id="panel-pokemon-derecha">
