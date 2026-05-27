@@ -1,6 +1,5 @@
 import * as funcionesGenerales from "./funciones-generales.js";
 import * as datosGenerales from "./datos-generales.js";
-import * as funcionesDreamTeam from "./dream-team.js";
 
 import type { Pokemon } from "./tipos";
 
@@ -51,54 +50,4 @@ export function filtraPorNombre(value: string) {
     }
   });
   return filtrados;
-}
-
-document.addEventListener("click", (e) => {
-  if (window.location.pathname.endsWith("pokedex.html")) {
-    const target = e.target as HTMLElement;
-
-    if (
-      target.classList.contains("icono-dream-team-interior") ||
-      target.classList.contains("icono-dream-team-vector1") ||
-      target.classList.contains("icono-dream-team-vector2")
-    ) {
-      const card = target.closest(".carta-pokemon") as HTMLElement;
-
-      if (card) {
-        const nombrePokemon = card.querySelector(".pokemon-name");
-        if (nombrePokemon) {
-          const nombrePokemonMinusculas =
-            nombrePokemon.textContent.toLowerCase();
-
-          const icono = card.getElementsByClassName(
-            "icono-dream-team-vector2",
-          )[0] as HTMLElement;
-
-          funcionesDreamTeam.modificarPokemonDreamTeamDesdeCarta(
-            nombrePokemonMinusculas,
-            icono,
-          );
-        }
-      }
-    } else if (
-      target.classList.contains("carta-pokemon") ||
-      target.classList.contains("pokemon-name") ||
-      target.classList.contains("pokemon-image") ||
-      target.classList.contains("pokemon-number") ||
-      target.classList.contains("pokemon-info")
-    ) {
-      const card = target.closest(".carta-pokemon") as HTMLElement;
-
-      if (card) {
-        const nombrePokemon = card.querySelector(".pokemon-name");
-        if (nombrePokemon) {
-          irPanelPokemon(nombrePokemon.textContent.toLowerCase());
-        }
-      }
-    }
-  }
-});
-
-export function irPanelPokemon(id: string) {
-  window.location.href = `panel-pokemon.html?pokemon=${id}`;
 }

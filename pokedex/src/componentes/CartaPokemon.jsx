@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import "../css/pokedex.css";
 import "../css/variables.css";
+import IconoFavoritos from "../iconos/IconoFavoritos.jsx";
 
 function CartaPokemon({ pokemon, dreamTeam }) {
   const primeraMayusculas = (texto) =>
@@ -38,18 +39,7 @@ function CartaPokemon({ pokemon, dreamTeam }) {
       />
 
       <div className="pokemon-info">
-        <div className="icono-dream-team">
-          <div className="icono-dream-team-interior">
-            <div className="icono-dream-team-vector1"></div>
-
-            <div
-              className={`icono-dream-team-vector2 ${
-                dreamTeam ? "activo" : ""
-              }`}
-            ></div>
-          </div>
-        </div>
-
+        <IconoFavoritos dreamTeam={pokemon.dreamTeam} />
         <div className="tipo-pokemon">
           {pokemon.tipos.map((tipo) => (
             <div key={tipo} className={`icono-tipo ${tipo}`}>

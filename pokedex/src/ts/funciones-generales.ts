@@ -2,11 +2,11 @@ import * as datosGenerales from "./datos-generales.js";
 import * as funcionesAPI from "./funciones-API.js";
 import * as funcionesStorage from "./storage-funciones.js";
 
-import type { Pokemon, PokemonAPI, PokemonListResponse } from "./tipos";
+import type { Pokemon, PokemonAPI, PokemonListResponse, TipoPokemon } from "./tipos";
 
-export async function obtenerTodosLosPokemons() {
+export async function obtenerTodosLosPokemons(): Promise<Pokemon[]> {
   const response = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=1302"
+    "https://pokeapi.co/api/v2/pokemon?limit=1025"
   );
 
   const data: PokemonListResponse = await response.json();
@@ -14,13 +14,39 @@ export async function obtenerTodosLosPokemons() {
   const resultados = await Promise.allSettled(
     data.results.map(async (pokemon: PokemonAPI) => {
       const res = await fetch(pokemon.url);
-      return await res.json();
+      const p = await res.json();
+
+      const pokemonFormateado: Pokemon = {
+        numero: p.id,
+        nombre: p.name,
+
+        tipos: p.types.map((t: TipoPokemon) => t.type.name),
+
+        imagen:
+          p.sprites.other?.["official-artwork"]?.front_default ??
+          p.sprites.front_default ??
+          "",
+
+        hp: p.stats[0]?.base_stat ?? 0,
+        atk: p.stats[1]?.base_stat ?? 0,
+        def: p.stats[2]?.base_stat ?? 0,
+        sat: p.stats[3]?.base_stat ?? 0,
+        sdf: p.stats[4]?.base_stat ?? 0,
+        spd: p.stats[5]?.base_stat ?? 0,
+
+        peso: p.weight / 10,
+        altura: p.height / 10,
+
+        dream_team: false,
+      };
+
+      return pokemonFormateado;
     })
   );
 
   return resultados
-    .filter((r) => r.status === "fulfilled")
-    .map((r) => (r as PromiseFulfilledResult<Pokemon>).value);
+    .filter((r): r is PromiseFulfilledResult<Pokemon> => r.status === "fulfilled")
+    .map((r) => r.value);
 }
 
 export async function setPokemonsPokedex() {
@@ -111,7 +137,7 @@ function sacarPokemonsAnteriores(id: number) {
 
 export function sacarTipoDato(value: string) {
   value = value.toLowerCase().trim();
-
+  
   if (datosGenerales.tiposPokemon.includes(value)) {
     return "tipo";
   }
