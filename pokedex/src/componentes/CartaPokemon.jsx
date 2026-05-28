@@ -23,7 +23,7 @@ function CartaPokemon({ pokemon, dreamTeam }) {
   };
 
   return (
-    <Link to={`/panel-pokemon/${pokemon.numero}`} className={`carta-pokemon ${pokemon.tipos[0]}`}>
+    <Link to={`/panel-pokemon/${pokemon.nombre}`} className={`carta-pokemon ${pokemon.tipos[0]}`}>
       <header>
         <p className="pokemon-name">{primeraMayusculas(pokemon.nombre)}</p>
 

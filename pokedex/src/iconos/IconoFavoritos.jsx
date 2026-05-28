@@ -1,17 +1,32 @@
-function IconoFavoritos(dreamTeam) {
+import { useState } from "react";
+import * as funcionesDreamTeam from "../ts/dream-team";
+
+function IconoFavoritos({ dreamTeam, nombre }) {
+  const [isDreamTeam, setIsDreamTeam] = useState(dreamTeam);
+
   return (
     <>
-        <div className="icono-dream-team">
-          <div className="icono-dream-team-interior">
-            <div className="icono-dream-team-vector1"></div>
+      <div
+        className="icono-dream-team"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
 
-            <div
-              className={`icono-dream-team-vector2 ${
-                dreamTeam ? "activo" : ""
-              }`}
-            ></div>
-          </div>
+          setIsDreamTeam((prev) => !prev);
+
+          funcionesDreamTeam.modificarPokemonDreamTeamDesdeCarta(nombre);
+        }}
+      >
+        <div className="icono-dream-team-interior">
+          <div className="icono-dream-team-vector1"></div>
+
+          <div
+            className={`icono-dream-team-vector2 ${
+              isDreamTeam ? "activo" : ""
+            }`}
+          ></div>
         </div>
+      </div>
     </>
   );
 }

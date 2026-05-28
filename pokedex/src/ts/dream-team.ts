@@ -3,15 +3,6 @@ import * as datosGenerales from "./datos-generales.js";
 
 import type { Pokemon } from "./tipos";
 
-mostrarDreamTeam();
-
-function mostrarDreamTeam() {
-  funcionesGenerales.setPokemonsDreamTeam().then(() => {
-    pokemonGrandeDreamTeam();
-    pokemonPequenoDreamTeam();
-  });
-}
-
 function pokemonGrandeDreamTeam() {
   const contenedorGrande = document.getElementById("dream-team-grandes");
   funcionesGenerales.vaciarHtmlConId("dream-team-grandes");
@@ -114,8 +105,7 @@ document.addEventListener("click", (e) => {
 });
 
 export function modificarPokemonDreamTeamDesdeCarta(
-  nombre: string,
-  icono: HTMLElement,
+  nombre: string
 ) {
   const pokemon = datosGenerales.listaPokemon.find((p) => p.nombre === nombre);
   datosGenerales.quitarRepetidosDreamTeam();
@@ -125,24 +115,8 @@ export function modificarPokemonDreamTeamDesdeCarta(
     !datosGenerales.dreamTeam.includes(pokemon) &&
     datosGenerales.dreamTeam.length < datosGenerales.maxDreamTeam
   ) {
-    sumarAlDreamTeamDesdeCarta(pokemon, icono);
+    pokemon.dream_team = true;
   } else if (pokemon != null && datosGenerales.dreamTeam.includes(pokemon)) {
-    quitarDelDreamTeamDesdeCarta(pokemon, icono);
+    pokemon.dream_team = false;
   }
-}
-
-export function sumarAlDreamTeamDesdeCarta(
-  pokemon: Pokemon,
-  icono: HTMLElement,
-) {
-  funcionesGenerales.sumarAlDreamTeam(pokemon);
-  icono.classList.add("activo");
-}
-
-export function quitarDelDreamTeamDesdeCarta(
-  pokemon: Pokemon,
-  icono: HTMLElement,
-) {
-  funcionesGenerales.quitarDelDreamTeam(pokemon);
-  icono.classList.remove("activo");
 }
