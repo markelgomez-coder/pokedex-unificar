@@ -36,8 +36,8 @@ function Pokedex() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       console.log("Buscar:", busqueda);
+      setLoading(true);
     }, 300);
-
     return () => clearTimeout(timeout);
   }, [busqueda]);
 
