@@ -9,7 +9,6 @@ import NoHayResultado from "../componentes/NoHayResultado";
 import CartaPokemonVacia from "../componentes/CartaPokemonVacia";
 import * as funcionesGenerales from "../ts/funciones-generales.js";
 import * as funcionesPokedex from "../ts/pokedex.js";
-import * as datosGenerales from "../ts/datos-generales.js";
 import CartaPokemon from "../componentes/CartaPokemon";
 
 import type { Pokemon } from "../ts/tipos";
@@ -69,7 +68,7 @@ function Pokedex() {
         </form>
       </div>
 
-      <section id="resultado-busqueda">{renderCartas()}</section>
+      <section id="resultado-busqueda" key={busqueda}>{renderCartas()}</section>
     </>
   );
 }
@@ -90,17 +89,19 @@ function mostrarPokemons(busqueda: string, listaPokemon: Pokemon[]) {
   if (PokemonsFiltrados == null) {
     return <ErrorAPI />;
   }
-
-  if (PokemonsFiltrados.length === 0 && busqueda !== "" && !datosGenerales.listaPokemon.some((p) => p.nombre === busqueda)) {
-    return <NoHayResultado busqueda={busqueda} />;
-  }
-
   const lista = busqueda === "" ? listaPokemon : PokemonsFiltrados;
 
   const ordenados =
-    busqueda === ""
-      ? [...lista].sort((a, b) => a.numero - b.numero)
-      : lista;
+    busqueda === "" ? [...lista].sort((a, b) => a.numero - b.numero) : lista;
+
+  if (
+    ordenados.length === 0 &&
+    busqueda !== "" &&
+    !ordenados.some((p) => p.nombre.includes(busqueda))
+  ) {
+    return <NoHayResultado busqueda={busqueda} />;
+  }
+
 
   return ordenados.map((pokemon) => (
     <CartaPokemon

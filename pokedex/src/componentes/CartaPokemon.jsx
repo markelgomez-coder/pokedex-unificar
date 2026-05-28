@@ -39,7 +39,7 @@ function CartaPokemon({ pokemon, dreamTeam }) {
       />
 
       <div className="pokemon-info">
-        <IconoFavoritos dreamTeam={pokemon.dreamTeam} />
+        <IconoFavoritos dreamTeam={pokemon.dreamTeam} nombre={pokemon.nombre} />
         <div className="tipo-pokemon">
           {pokemon.tipos.map((tipo) => (
             <div key={tipo} className={`icono-tipo ${tipo}`}>
