@@ -91,7 +91,7 @@ function mostrarPokemons(busqueda: string, listaPokemon: Pokemon[]) {
     return <ErrorAPI />;
   }
 
-  if (PokemonsFiltrados.length === 0 && busqueda !== "" && datosGenerales.listaPokemon.some((p) => p.nombre === busqueda)) {
+  if (PokemonsFiltrados.length === 0 && busqueda !== "" && !datosGenerales.listaPokemon.some((p) => p.nombre === busqueda)) {
     return <NoHayResultado busqueda={busqueda} />;
   }
 
