@@ -108,7 +108,6 @@ export function modificarPokemonDreamTeamDesdeCarta(
   nombre: string
 ) {
   const pokemon = datosGenerales.listaPokemon.find((p) => p.nombre === nombre);
-  datosGenerales.quitarRepetidosDreamTeam();
 
   if (
     pokemon != null &&
@@ -116,7 +115,9 @@ export function modificarPokemonDreamTeamDesdeCarta(
     datosGenerales.dreamTeam.length < datosGenerales.maxDreamTeam
   ) {
     pokemon.dream_team = true;
+    datosGenerales.dreamTeam.push(pokemon);
   } else if (pokemon != null && datosGenerales.dreamTeam.includes(pokemon)) {
     pokemon.dream_team = false;
+    datosGenerales.dreamTeam.splice(datosGenerales.dreamTeam.indexOf(pokemon), 1);
   }
 }

@@ -1,20 +1,22 @@
 import * as datosGenerales from "./datos-generales.js";
+import { hacerFetch } from "./fetch.js";
 import * as funcionesAPI from "./funciones-API.js";
 import * as funcionesStorage from "./storage-funciones.js";
 
-import type { Pokemon, PokemonAPI, PokemonListResponse, TipoPokemon } from "./tipos";
+import type {
+  Pokemon,
+  PokemonAPI,
+  TipoPokemon,
+} from "./tipos";
 
 export async function obtenerTodosLosPokemons(): Promise<Pokemon[]> {
-  const response = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=1025"
-  );
+  const url = `https://pokeapi.co/api/v2/pokemon?limit=1025`;
 
-  const data: PokemonListResponse = await response.json();
+  const data = await hacerFetch(url);
 
   const resultados = await Promise.allSettled(
     data.results.map(async (pokemon: PokemonAPI) => {
-      const res = await fetch(pokemon.url);
-      const p = await res.json();
+      const p = await hacerFetch(pokemon.url);
 
       const pokemonFormateado: Pokemon = {
         numero: p.id,
@@ -41,11 +43,13 @@ export async function obtenerTodosLosPokemons(): Promise<Pokemon[]> {
       };
 
       return pokemonFormateado;
-    })
+    }),
   );
 
   return resultados
-    .filter((r): r is PromiseFulfilledResult<Pokemon> => r.status === "fulfilled")
+    .filter(
+      (r): r is PromiseFulfilledResult<Pokemon> => r.status === "fulfilled",
+    )
     .map((r) => r.value);
 }
 
@@ -137,7 +141,7 @@ function sacarPokemonsAnteriores(id: number) {
 
 export function sacarTipoDato(value: string) {
   value = value.toLowerCase().trim();
-  
+
   if (datosGenerales.tiposPokemon.includes(value)) {
     return "tipo";
   }

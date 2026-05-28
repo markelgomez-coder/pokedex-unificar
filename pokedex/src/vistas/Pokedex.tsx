@@ -89,6 +89,7 @@ function mostrarPokemons(busqueda: string, listaPokemon: Pokemon[]) {
   if (PokemonsFiltrados == null) {
     return <ErrorAPI />;
   }
+  
   const lista = busqueda === "" ? listaPokemon : PokemonsFiltrados;
 
   const ordenados =
