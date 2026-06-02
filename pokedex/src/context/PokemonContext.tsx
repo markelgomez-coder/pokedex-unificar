@@ -6,7 +6,9 @@ export interface PokemonContextType {
   listaDreamTeam: Pokemon[];
 
   setListaPokemon: React.Dispatch<React.SetStateAction<Pokemon[]>>;
-  setListaDreamTeam: React.Dispatch<React.SetStateAction<Pokemon[]>>;
+
+  agregarADreamTeam: (pokemon: Pokemon) => void;
+  eliminarDeDreamTeam: (nombre: string) => void;
 
   inicializar: () => Promise<void>;
 }
