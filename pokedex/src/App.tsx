@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { PokemonProvider } from "./context/PokemonProvider";
 
 import "./css/variables.css";
 import "./css/static.css";
@@ -38,16 +39,18 @@ function Layout({ children }: { children: React.ReactNode }) {
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/pokedex" element={<Pokedex />} />
-          <Route path="/dream-team" element={<DreamTeam />} />
-          <Route path="/panel-pokemon/:id" element={<Panel_Pokemon />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+    <PokemonProvider>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/pokedex" element={<Pokedex />} />
+            <Route path="/dream-team" element={<DreamTeam />} />
+            <Route path="/panel-pokemon/:id" element={<Panel_Pokemon />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </PokemonProvider>
   );
 }
 

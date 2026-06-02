@@ -3,11 +3,11 @@ import "../css/variables.css";
 import "../css/static.css";
 
 import { useEffect, useState } from "react";
+import { usePokemonContext } from "../context/usePokemonContext";
 
 import ErrorAPI from "../componentes/ErrorAPI";
 import NoHayResultado from "../componentes/NoHayResultado";
 import CartaPokemonVacia from "../componentes/CartaPokemonVacia";
-import * as funcionesGenerales from "../ts/funciones-generales.js";
 import * as funcionesPokedex from "../ts/pokedex.js";
 import CartaPokemon from "../componentes/CartaPokemon";
 
@@ -15,23 +15,9 @@ import type { Pokemon } from "../ts/tipos";
 
 function Pokedex() {
   const [busqueda, setBusqueda] = useState("");
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const loadPokemons = async () => {
-      try {
-        const data = await funcionesGenerales.obtenerTodosLosPokemons();
-        setPokemons(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadPokemons();
-  }, []);
+  const { listaPokemon } = usePokemonContext();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -43,10 +29,11 @@ function Pokedex() {
 
   const renderCartas = () => {
     if (loading) {
+      setLoading(false);
       return mostrarCartasVacias();
     }
 
-    return mostrarPokemons(busqueda, pokemons);
+    return mostrarPokemons(busqueda, listaPokemon);
   };
 
   return (
@@ -68,7 +55,9 @@ function Pokedex() {
         </form>
       </div>
 
-      <section id="resultado-busqueda" key={busqueda}>{renderCartas()}</section>
+      <section id="resultado-busqueda" key={busqueda}>
+        {renderCartas()}
+      </section>
     </>
   );
 }
@@ -89,7 +78,7 @@ function mostrarPokemons(busqueda: string, listaPokemon: Pokemon[]) {
   if (PokemonsFiltrados == null) {
     return <ErrorAPI />;
   }
-  
+
   const lista = busqueda === "" ? listaPokemon : PokemonsFiltrados;
 
   const ordenados =
@@ -102,7 +91,6 @@ function mostrarPokemons(busqueda: string, listaPokemon: Pokemon[]) {
   ) {
     return <NoHayResultado busqueda={busqueda} />;
   }
-
 
   return ordenados.map((pokemon) => (
     <CartaPokemon
