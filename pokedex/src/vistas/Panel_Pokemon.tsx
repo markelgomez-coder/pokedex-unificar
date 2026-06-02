@@ -8,7 +8,6 @@ import "../css/panel-pokemon.css";
 
 import type { Pokemon } from "../ts/tipos";
 import * as funcionesAPI from "../ts/funciones-API.js";
-import * as funcionesGenerales from "../ts/funciones-generales.js";
 import CartaPokemon from "../componentes/CartaPokemon";
 
 type DanoPokemon = { name: string };
@@ -28,9 +27,6 @@ function Panel_Pokemon() {
 
     const cargarDatos = async () => {
       const poke = await funcionesAPI.obtenerPokemon(id);
-
-      await funcionesGenerales.setPokemonsDreamTeam();
-
       setPokemon(poke);
 
       const [

@@ -5,7 +5,7 @@ import "../css/pokedex.css";
 import "../css/variables.css";
 import IconoFavoritos from "../iconos/IconoFavoritos.jsx";
 
-function CartaPokemon({ pokemon, dreamTeam }) {
+function CartaPokemon({ pokemon, dreamTeam }) {  
   const primeraMayusculas = (texto) =>
     texto.charAt(0).toUpperCase() + texto.slice(1);
 

@@ -73,7 +73,7 @@ function mostrarCartasVacias() {
 }
 
 function mostrarPokemons(busqueda: string, listaPokemon: Pokemon[]) {
-  const PokemonsFiltrados = funcionesPokedex.filtrarPokemons(busqueda);
+  const PokemonsFiltrados = funcionesPokedex.filtrarPokemons(busqueda,listaPokemon);
 
   if (PokemonsFiltrados == null) {
     return <ErrorAPI />;
@@ -87,12 +87,12 @@ function mostrarPokemons(busqueda: string, listaPokemon: Pokemon[]) {
   if (
     ordenados.length === 0 &&
     busqueda !== "" &&
-    !ordenados.some((p) => p.nombre.includes(busqueda))
+    !ordenados.some((p:Pokemon) => p.nombre.includes(busqueda))
   ) {
     return <NoHayResultado busqueda={busqueda} />;
   }
 
-  return ordenados.map((pokemon) => (
+  return ordenados.map((pokemon: Pokemon) => (
     <CartaPokemon
       key={pokemon.numero}
       pokemon={pokemon}
