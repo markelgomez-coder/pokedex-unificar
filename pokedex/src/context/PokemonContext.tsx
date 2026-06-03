@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import type { Pokemon } from "../ts/tipos.js";
+import type { Pokemon } from "../ts/tipos";
 
 export interface PokemonContextType {
   listaPokemon: Pokemon[];
@@ -7,8 +7,7 @@ export interface PokemonContextType {
 
   setListaPokemon: React.Dispatch<React.SetStateAction<Pokemon[]>>;
 
-  agregarADreamTeam: (pokemon: Pokemon) => void;
-  eliminarDeDreamTeam: (nombre: string) => void;
+  meterAlDreamTeam: (pokemon: Pokemon) => void;
 
   inicializar: () => Promise<void>;
 }

@@ -1,20 +1,16 @@
 import { usePokemonContext } from "../context/usePokemonContext";
 
 function IconoFavoritos({ pokemon }) {
-  const { listaDreamTeam, agregarADreamTeam, eliminarDeDreamTeam } =
+  const { listaDreamTeam, meterAlDreamTeam } =
     usePokemonContext();
 
-  const isDreamTeam = listaDreamTeam.some((p) => p.nombre === pokemon.nombre);
+  const isDreamTeam = esDreamTeam(pokemon, listaDreamTeam);
 
   function manejarFavorito(e) {
     e.preventDefault();
     e.stopPropagation();
 
-    if (isDreamTeam) {
-      eliminarDeDreamTeam(pokemon.nombre);
-    } else {
-      agregarADreamTeam(pokemon);
-    }
+    meterAlDreamTeam(pokemon);
   }
 
   return (
@@ -28,6 +24,10 @@ function IconoFavoritos({ pokemon }) {
       </div>
     </div>
   );
+}
+
+function esDreamTeam(pokemon, listaDreamTeam) {
+  return listaDreamTeam.some((p) => p.nombre === pokemon.nombre);
 }
 
 export default IconoFavoritos;

@@ -1,8 +1,8 @@
 import { type ReactNode, useEffect, useState } from "react";
 import { PokemonContext } from "./PokemonContext";
-import * as funcionesGenerales from "../ts/funciones-generales.js";
+import * as funcionesGenerales from "../ts/funciones-generales";
 import type { Pokemon } from "../ts/tipos.js";
-import { obtenerDreamTeamDesdeStorage } from "../ts/storage-funciones.js";
+import { obtenerDreamTeamDesdeStorage } from "../ts/storage-funciones";
 
 interface PokemonProviderProps {
   children: ReactNode;
@@ -32,26 +32,17 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
     setListaDreamTeam(dreamTeam);
   }
 
-  function agregarADreamTeam(pokemon: Pokemon) {
+  function meterAlDreamTeam(nuevo: Pokemon) {
     setListaDreamTeam((prev) => {
-      const existe = prev.some((p) => p.nombre === pokemon.nombre);
+      const existe = prev.some((p) => p.nombre === nuevo.nombre);
 
-      if (existe || prev.length >= 6) return prev;
-
-      pokemon.dream_team = true;
-
-      return [...prev, pokemon];
+      if (existe){
+        return prev.filter((pokemon) => pokemon.nombre !== nuevo.nombre);
+      }else if(!existe && prev.length < 6) {
+        return [...prev, nuevo];
+      }
+      return prev;
     });
-  }
-
-  function eliminarDeDreamTeam(nombre: string) {
-    setListaDreamTeam((prev) =>
-      prev.filter((pokemon) => pokemon.nombre !== nombre),
-    );
-    const pokemon = listaPokemon.find((p) => p.nombre === nombre);
-    if (pokemon) {
-      pokemon.dream_team = false;
-    }
   }
 
   return (
@@ -60,8 +51,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
         listaPokemon,
         setListaPokemon,
         listaDreamTeam,
-        agregarADreamTeam,
-        eliminarDeDreamTeam,
+        meterAlDreamTeam,
         inicializar,
       }}
     >

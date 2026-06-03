@@ -1,5 +1,5 @@
-import * as datosGenerales from "./datos-generales.js";
-import { hacerFetch } from "./fetch.js";
+import * as datosGenerales from "./datos-generales";
+import { hacerFetch } from "./fetch";
 
 import type {
   Pokemon,

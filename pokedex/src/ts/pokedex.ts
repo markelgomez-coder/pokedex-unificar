@@ -1,4 +1,4 @@
-import * as funcionesGenerales from "./funciones-generales.js";
+import * as funcionesGenerales from "./funciones-generales";
 
 import type { Pokemon } from "./tipos";
 

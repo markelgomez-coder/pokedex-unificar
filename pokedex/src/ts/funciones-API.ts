@@ -6,7 +6,7 @@ import type {
   EvolutionNode,
 } from "./tipos";
 
-import { hacerFetch } from "./fetch.js";
+import { hacerFetch } from "./fetch";
 
 export async function obtenerPokemon(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;

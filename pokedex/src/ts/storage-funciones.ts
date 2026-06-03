@@ -1,4 +1,4 @@
-import type { Pokemon } from "./tipos.js";
+import type { Pokemon } from "./tipos";
 
 export function obtenerDreamTeamDesdeStorage(
   listaPokemon: Pokemon[],

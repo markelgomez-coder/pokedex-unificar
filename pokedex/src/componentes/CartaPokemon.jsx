@@ -1,4 +1,4 @@
-import * as funcionesGenerales from "../js/src/ts/funciones-generales.js";
+import * as funcionesGenerales from "../ts/funciones-generales";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import "../css/pokedex.css";
@@ -37,9 +37,8 @@ function CartaPokemon({ pokemon, dreamTeam }) {
         src={pokemon.imagen}
         alt={`Imagen ${primeraMayusculas(pokemon.nombre)}`}
       />
-
       <div className="pokemon-info">
-        <IconoFavoritos dreamTeam={pokemon.dreamTeam} nombre={pokemon.nombre} />
+        <IconoFavoritos pokemon={pokemon}  />
         <div className="tipo-pokemon">
           {pokemon.tipos.map((tipo) => (
             <div key={tipo} className={`icono-tipo ${tipo}`}>
