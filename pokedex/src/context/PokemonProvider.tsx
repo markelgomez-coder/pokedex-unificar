@@ -12,33 +12,39 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
   const [listaPokemon, setListaPokemon] = useState<Pokemon[]>([]);
   const [listaDreamTeam, setListaDreamTeam] = useState<Pokemon[]>([]);
 
-  useEffect(() => {
-    void inicializar();
-  }, []);
+const [inicializado, setInicializado] = useState(false);
 
-  useEffect(() => {
-    const nombres = listaDreamTeam.map((pokemon) => pokemon.nombre);
+useEffect(() => {
+  void inicializar();
+}, []);
 
-    localStorage.setItem("dream-team", JSON.stringify(nombres));
-  }, [listaDreamTeam]);
+useEffect(() => {
+  if (!inicializado) return;
 
-  async function inicializar() {
-    const pokemon = await obtenerListaPokemon();
+  const nombres = listaDreamTeam.map((pokemon) => pokemon.nombre);
 
-    setListaPokemon(pokemon);
+  localStorage.setItem("dream-team", JSON.stringify(nombres));
+}, [listaDreamTeam, inicializado]);
 
-    const dreamTeam = obtenerDreamTeamDesdeStorage(pokemon);
+async function inicializar() {
+  const pokemon = await obtenerListaPokemon();
 
-    setListaDreamTeam(dreamTeam);
-  }
+  setListaPokemon(pokemon);
+
+  const dreamTeam = obtenerDreamTeamDesdeStorage(pokemon);
+
+  setListaDreamTeam(dreamTeam);
+
+  setInicializado(true);
+}
 
   function meterAlDreamTeam(nuevo: Pokemon) {
     setListaDreamTeam((prev) => {
       const existe = prev.some((p) => p.nombre === nuevo.nombre);
 
-      if (existe){
+      if (existe) {
         return prev.filter((pokemon) => pokemon.nombre !== nuevo.nombre);
-      }else if(!existe && prev.length < 6) {
+      } else if (!existe && prev.length < 6) {
         return [...prev, nuevo];
       }
       return prev;
