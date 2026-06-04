@@ -8,33 +8,26 @@ import { usePokemonContext } from "../context/usePokemonContext";
 import ErrorAPI from "../componentes/ErrorAPI";
 import NoHayResultado from "../componentes/NoHayResultado";
 import CartaPokemonVacia from "../componentes/CartaPokemonVacia";
-import * as funcionesPokedex from "../ts/pokedex.js";
+import * as funcionesPokedex from "../ts/pokedex";
 import CartaPokemon from "../componentes/CartaPokemon";
 
 import type { Pokemon } from "../ts/tipos";
 
 function Pokedex() {
   const [busqueda, setBusqueda] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [busquedaDebounce, setBusquedaDebounce] = useState("");
 
   const { listaPokemon } = usePokemonContext();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      console.log("Buscar:", busqueda);
-      setLoading(true);
+      setBusquedaDebounce(busqueda);
     }, 300);
+
     return () => clearTimeout(timeout);
   }, [busqueda]);
 
-  const renderCartas = () => {
-    if (loading) {
-      setLoading(false);
-      return mostrarCartasVacias();
-    }
-
-    return mostrarPokemons(busqueda, listaPokemon);
-  };
+  const loading = busqueda !== busquedaDebounce;
 
   return (
     <>
@@ -55,8 +48,10 @@ function Pokedex() {
         </form>
       </div>
 
-      <section id="resultado-busqueda" key={busqueda}>
-        {renderCartas()}
+      <section id="resultado-busqueda">
+        {loading
+          ? mostrarCartasVacias()
+          : mostrarPokemons(busquedaDebounce, listaPokemon)}
       </section>
     </>
   );
@@ -73,7 +68,10 @@ function mostrarCartasVacias() {
 }
 
 function mostrarPokemons(busqueda: string, listaPokemon: Pokemon[]) {
-  const PokemonsFiltrados = funcionesPokedex.filtrarPokemons(busqueda,listaPokemon);
+  const PokemonsFiltrados = funcionesPokedex.filtrarPokemons(
+    busqueda,
+    listaPokemon
+  );
 
   if (PokemonsFiltrados == null) {
     return <ErrorAPI />;
@@ -87,7 +85,9 @@ function mostrarPokemons(busqueda: string, listaPokemon: Pokemon[]) {
   if (
     ordenados.length === 0 &&
     busqueda !== "" &&
-    !ordenados.some((p:Pokemon) => p.nombre.includes(busqueda))
+    !ordenados.some((p: Pokemon) =>
+      p.nombre.includes(busqueda)
+    )
   ) {
     return <NoHayResultado busqueda={busqueda} />;
   }
