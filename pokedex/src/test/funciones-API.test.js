@@ -9,12 +9,12 @@ import {
   vi,
 } from "vitest";
 
-vi.mock("../js/src/ts/fetch.js", () => ({
+vi.mock("../ts/fetch", () => ({
   hacerFetch: vi.fn(),
 }));
 
-import * as funcionesAPI from "../js/src/ts/funciones-API.js";
-import { hacerFetch } from "../js/src/ts/fetch.js";
+import * as funcionesAPI from "../ts/funciones-API";
+import { hacerFetch } from "../ts/fetch";
 
 describe("Obtener diferentes datos de la API", () => {
   afterEach(() => {

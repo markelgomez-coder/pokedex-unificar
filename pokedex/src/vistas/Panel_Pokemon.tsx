@@ -7,7 +7,7 @@ import "../css/pokedex.css";
 import "../css/panel-pokemon.css";
 
 import type { Pokemon } from "../ts/tipos";
-import * as funcionesAPI from "../ts/funciones-API.js";
+import * as funcionesAPI from "../ts/funciones-API";
 import CartaPokemon from "../componentes/CartaPokemon";
 
 type DanoPokemon = { name: string };

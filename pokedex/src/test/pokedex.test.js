@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import * as funcionesPokedex from "../js/src/ts/pokedex.js";
-import { hacerFetch } from "../js/src/ts/fetch.js";
+import * as funcionesPokedex from "../ts/pokedex";
+import { hacerFetch } from "../ts/fetch";
 
-vi.mock("../js/src/ts/datos-generales.js", async (importOriginal) => {
+vi.mock("../ts/datos-generales", async (importOriginal) => {
   const actual = await importOriginal();
 
   const listaPokemonMock = [

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeAll, afterAll } from "vitest";
-import { hacerFetch } from "../js/src/ts/fetch.js";
+import { hacerFetch } from "../ts/fetch";
 
 describe("La funcion hacer fetch funciona correctamente", () => {
   beforeAll(() => {
