@@ -1,8 +1,8 @@
 import { type ReactNode, useEffect, useState } from "react";
-import { PokemonContext } from "./PokemonContext";
-import * as funcionesGenerales from "../ts/funciones-generales";
-import type { Pokemon } from "../ts/tipos.js";
-import { obtenerDreamTeamDesdeStorage } from "../ts/storage-funciones";
+import { PokemonContext } from "./PokemonContext.js";
+import type { Pokemon } from "../../ts/tipos.js";
+import { pokemonRepository } from "../../infra/pokemonRepositoryFetch.js";
+import { dreamTeamStorage } from "../../infra/dreamTeamLocalStorage.js";
 
 interface PokemonProviderProps {
   children: ReactNode;
@@ -23,15 +23,19 @@ useEffect(() => {
 
   const nombres = listaDreamTeam.map((pokemon) => pokemon.nombre);
 
-  localStorage.setItem("dream-team", JSON.stringify(nombres));
+  dreamTeamStorage.set(nombres);
 }, [listaDreamTeam, inicializado]);
 
 async function inicializar() {
-  const pokemon = await obtenerListaPokemon();
+  const pokemon = await pokemonRepository.obtenerTodos();
 
   setListaPokemon(pokemon);
 
-  const dreamTeam = obtenerDreamTeamDesdeStorage(pokemon);
+  const nombres = dreamTeamStorage.get();
+
+  const dreamTeam = nombres
+    ? pokemon.filter((p) => nombres.includes(p.nombre))
+    : [];
 
   setListaDreamTeam(dreamTeam);
 
@@ -67,5 +71,5 @@ async function inicializar() {
 }
 
 async function obtenerListaPokemon(): Promise<Pokemon[]> {
-  return await funcionesGenerales.obtenerTodosLosPokemons();
+  return await pokemonRepository.obtenerTodos();
 }

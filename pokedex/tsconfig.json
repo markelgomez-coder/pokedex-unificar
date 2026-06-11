@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
-    "outDir": "./src/js",
+    "outDir": "src_antiguo/js",
     "allowJs": true,
     "jsx": "react-jsx"
   }

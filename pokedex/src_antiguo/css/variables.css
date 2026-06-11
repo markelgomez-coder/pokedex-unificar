@@ -1,0 +1,109 @@
+@font-face {
+  font-family: "Pokemon-solid";
+  src: url("../fonts/Pokemon Solid.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Pokemon-hollow";
+  src: url("../fonts/Pokemon Hollow.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Coolvetica";
+  src: url("../fonts/Coolvetica Rg.otf") format("opentype");
+}
+
+:root {
+  --shadow-s: rgba(125, 59, 236, 0.07);
+  --shadow-m: rgba(125, 59, 236, 0.05);
+  --shadow-l: rgba(125, 59, 236, 0.05);
+
+  --radius-2xs: 4px;
+  --radius-xs: 8px;
+  --radius-s: 12px;
+  --radius-m: 16px;
+  --radius-l: 20px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+
+  --spacing-3xs: 2px;
+  --spacing-2xs: 4px;
+  --spacing-xs: 8px;
+  --spacing-s: 12px;
+  --spacing-m: 16px;
+  --spacing-l: 20px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 40px;
+  --spacing-4xl: 64px;
+
+  --color-brand-0: #ffffff;
+  --color-brand-50: #f5f4f5;
+  --color-brand-100: #eaeaeb;
+  --color-brand-200: #d6d4d6;
+  --color-brand-300: #c1bfc2;
+  --color-brand-400: #ada9ad;
+  --color-brand-500: #989499;
+  --color-brand-600: #5c5a5d;
+  --color-brand-700: #3f3d3f;
+  --color-brand-800: #212021;
+  --color-brand-900: #030303;
+
+  --color-accent: #7d3bec;
+
+  --color-grass: #a2ce69;
+  --color-bug: #c6d282;
+  --color-electric: #ebd56c;
+  --color-ground: #d3ae6b;
+  --color-fire: #d36255;
+  --color-fighting: #b44d54;
+  --color-poison: #9756dc;
+  --color-psychic: #db6ab5;
+  --color-fairy: #e8a9d3;
+  --color-dragon: #b7b6db;
+  --color-flying: #a2bfeb;
+  --color-ghost: #655a7d;
+  --color-water: #3cafe8;
+  --color-ice: #c6fbf9;
+  --color-normal: #d1d2c0;
+  --color-rock: #a49d9a;
+  --color-steel: #78817e;
+  --color-dark: #3d413f;
+
+  --mobile-width: 768px;
+
+  --font-size-mobile-display1: 24px;
+  --font-size-mobile-headline: 20px;
+  --font-size-mobile-subheadline: 16px;
+  --font-size-mobile-link: 14px;
+  --font-size-mobile-body: 14px;
+  --font-size-mobile-caption: 12px;
+
+  --font-size-computer-display1: 28px;
+  --font-size-computer-headline: 24px;
+  --font-size-computer-subheadline: 18px;
+  --font-size-computer-link: 16px;
+  --font-size-computer-body: 16px;
+  --font-size-computer-caption: 12px;
+
+  --estadistica-hp-bulbasaur: 45;
+  --estadistica-atk-bulbasaur: 49;
+  --estadistica-def-bulbasaur: 49;
+  --estadistica-sat-bulbasaur: 65;
+  --estadistica-sdf-bulbasaur: 65;
+  --estadistica-spd-bulbasaur: 45;
+
+  --estadistica-hp-ivysaur: 45;
+  --estadistica-atk-ivysaur: 49;
+  --estadistica-def-ivysaur: 49;
+  --estadistica-sat-ivysaur: 65;
+  --estadistica-sdf-ivysaur: 65;
+  --estadistica-spd-ivysaur: 45;
+
+  --estadistica-hp-venusaur: 45;
+  --estadistica-atk-venusaur: 49;
+  --estadistica-def-venusaur: 49;
+  --estadistica-sat-venusaur: 65;
+  --estadistica-sdf-venusaur: 65;
+  --estadistica-spd-venusaur: 45;
+}

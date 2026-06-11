@@ -1,11 +1,11 @@
-import * as funcionesGenerales from "../ts/funciones-generales";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import * as funcionesGenerales from "../../ts/funciones-generales.js";
+import { Link } from "react-router-dom";
 
-import "../css/pokedex.css";
-import "../css/variables.css";
+import "../../css/pokedex.css";
+import "../../css/variables.css";
 import IconoFavoritos from "../iconos/IconoFavoritos.jsx";
 
-function CartaPokemon({ pokemon, dreamTeam }) {  
+function CartaPokemon({ pokemon, dreamTeam }) {
   const primeraMayusculas = (texto) =>
     texto.charAt(0).toUpperCase() + texto.slice(1);
 

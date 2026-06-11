@@ -1,16 +1,16 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { PokemonProvider } from "./presentation/contexts/PokemonProvider";
+import { PokemonProvider } from "./context/PokemonProvider";
 
 import "./css/variables.css";
 import "./css/static.css";
 import "./css/iconos.css";
 
-import Pokeball from "./presentation/iconos/Pokeball";
+import Pokeball from "./iconos/Pokeball";
 
-import Home from "./presentation/pages/Home";
-import Pokedex from "./presentation/pages/Pokedex";
-import DreamTeam from "./presentation/pages/DreamTeam";
-import Panel_Pokemon from "./presentation/pages/Panel_Pokemon";
+import Home from "./vistas/Home";
+import Pokedex from "./vistas/Pokedex";
+import DreamTeam from "./vistas/DreamTeam";
+import Panel_Pokemon from "./vistas/Panel_Pokemon";
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
