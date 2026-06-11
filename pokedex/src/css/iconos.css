@@ -150,7 +150,7 @@
   );
 }
 
-.icono-dream-team-vector2.activo{
+.icono-dream-team-vector2.activo {
   background-color: var(--color-brand-900);
 }
 
@@ -398,3 +398,59 @@
   height: 40px;
 
   border: solid 8px var(--color-brand-0);
+  border-radius: 100%;
+}
+
+.carta-pokemon-vacia-icono-interior-linea-derecha {
+  position: absolute;
+
+  top: calc(384px / 2 - 8px);
+  left: calc(345px / 2 - 48px);
+
+  width: 40px;
+
+  border: solid 8px var(--color-brand-0);
+}
+
+.carta-pokemon-vacia-icono-interior-linea-izquierda {
+  position: absolute;
+
+  top: calc(384px / 2 - 8px);
+  left: calc(345px / 2 + 27px);
+
+  width: 40px;
+
+  border: solid 8px var(--color-brand-0);
+}
+
+@media (min-width: 1219px) {
+  .carta-pokemon-vacia {
+    width: 285px;
+    height: 400px;
+  }
+
+  .carta-pokemon-vacia-interior {
+    width: 269px;
+    height: 384px;
+  }
+
+  .carta-pokemon-vacia-icono-interior-circulo-fuera {
+    top: calc(384px / 2 - 120px / 2);
+    left: calc(269px / 2 - 120px / 2 + 8px);
+  }
+
+  .carta-pokemon-vacia-icono-interior-circulo-dentro {
+    top: calc(384px / 2 - 40px / 2);
+    left: calc(269px / 2 - 40px / 2 + 8px);
+  }
+
+  .carta-pokemon-vacia-icono-interior-linea-derecha {
+    top: calc(384px / 2 - 8px);
+    left: calc(269px / 2 - 48px);
+  }
+
+  .carta-pokemon-vacia-icono-interior-linea-izquierda {
+    top: calc(384px / 2 - 8px);
+    left: calc(269px / 2 + 27px);
+  }
+}
