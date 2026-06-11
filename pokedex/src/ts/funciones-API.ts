@@ -40,8 +40,7 @@ export async function obtenerPokemonDescripcion(id: string) {
   const entradaEspanol = data.flavor_text_entries.find(
     (entry: FlavorTextEntry) => entry.language.name === "en",
   );
-  return entradaEspanol.flavor_text.replace(/[
-\f]/g, " ");
+  return entradaEspanol.flavor_text.replace(/[\f]/g, " ");
 }
 
 export async function obtenerPokemonTipos(id: string) {
