@@ -1,14 +1,26 @@
-import * as funcionesGenerales from "../../ts/funciones-generales.js";
+import * as funcionesGenerales from "../../application/services/pokemonService";
 import { Link } from "react-router-dom";
 
 import "../../css/pokedex.css";
 import "../../css/variables.css";
-import IconoFavoritos from "../iconos/IconoFavoritos.jsx";
+import IconoFavoritos from "../iconos/IconoFavoritos";
 
-function CartaPokemon({ pokemon, dreamTeam }) {
-  const primeraMayusculas = (texto) =>
-    texto.charAt(0).toUpperCase() + texto.slice(1);
+import type { Pokemon } from "../../domain/entities/pokemon";
 
+interface Props {
+  pokemon: Pokemon;
+  dreamTeam?: boolean;
+}
+
+function primeraMayusculas(texto: string) {
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
+function calcularBarraPintada(valor: number) {
+  return `${270 * (valor / 255) - 16}px`;
+}
+
+export default function CartaPokemon({ pokemon }: Props) {
   const stats = [
     { nombre: "HP", valor: pokemon.hp },
     { nombre: "ATK", valor: pokemon.atk },
@@ -17,10 +29,6 @@ function CartaPokemon({ pokemon, dreamTeam }) {
     { nombre: "SDF", valor: pokemon.sdf },
     { nombre: "SPD", valor: pokemon.spd },
   ];
-
-  const calcularBarraPintada = (valor) => {
-    return `${270 * (valor / 255) - 16}px`;
-  };
 
   return (
     <Link to={`/panel-pokemon/${pokemon.nombre}`} className={`carta-pokemon ${pokemon.tipos[0]}`}>
@@ -38,7 +46,7 @@ function CartaPokemon({ pokemon, dreamTeam }) {
         alt={`Imagen ${primeraMayusculas(pokemon.nombre)}`}
       />
       <div className="pokemon-info">
-        <IconoFavoritos pokemon={pokemon}  />
+        <IconoFavoritos pokemon={pokemon} />
         <div className="tipo-pokemon">
           {pokemon.tipos.map((tipo) => (
             <div key={tipo} className={`icono-tipo ${tipo}`}>
@@ -78,5 +86,3 @@ function CartaPokemon({ pokemon, dreamTeam }) {
     </Link>
   );
 }
-
-export default CartaPokemon;

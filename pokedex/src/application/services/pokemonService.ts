@@ -1,11 +1,11 @@
-import * as datosGenerales from "./datos-generales";
-import { hacerFetch } from "./fetch";
+import * as datosGenerales from "../../domain/constants/datos-generales";
+import { hacerFetch } from "../../infra/http/fetch";
 
 import type {
   Pokemon,
   PokemonAPI,
   TipoPokemon,
-} from "./tipos";
+} from "../../domain/entities/pokemon";
 
 export async function obtenerTodosLosPokemons(): Promise<Pokemon[]> {
   const url = `https://pokeapi.co/api/v2/pokemon?limit=1025`;

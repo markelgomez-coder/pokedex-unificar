@@ -1,18 +1,18 @@
 export type Pokemon = {
-    nombre: string,
-    numero: number,
-    imagen: string,
-    tipos: Array<string>,
-    peso: number,
-    altura: number,
-    hp: number,
-    atk: number,
-    def: number,
-    sat: number,
-    sdf: number,
-    spd: number,
-    dream_team:boolean,
-}
+  nombre: string;
+  numero: number;
+  imagen: string;
+  tipos: Array<string>;
+  peso: number;
+  altura: number;
+  hp: number;
+  atk: number;
+  def: number;
+  sat: number;
+  sdf: number;
+  spd: number;
+  dream_team: boolean;
+};
 
 export type PokemonAPI = {
   name: string;
@@ -24,19 +24,19 @@ export type PokemonListResponse = {
 };
 
 export type Type = {
-    name: string,  
-    url: string,   
-}
+  name: string;
+  url: string;
+};
 
 export type TipoPokemon = {
-    slot: number,  
-    type: Type,    
-}
+  slot: number;
+  type: Type;
+};
 
 export type DanoPokemon = {
-    name: string,
-    url: string,
-}
+  name: string;
+  url: string;
+};
 
 export type EvolutionNode = {
   species: {

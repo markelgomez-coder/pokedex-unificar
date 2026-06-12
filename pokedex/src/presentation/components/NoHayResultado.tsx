@@ -1,4 +1,8 @@
-function NoHayResultado({ busqueda }) {
+interface Props {
+  busqueda: string;
+}
+
+export default function NoHayResultado({ busqueda }: Props) {
   return (
     <div className="no-hay-resultado">
       <div className="icono-no-hay-resultado">
@@ -14,5 +18,3 @@ function NoHayResultado({ busqueda }) {
     </div>
   );
 }
-
-export default NoHayResultado;

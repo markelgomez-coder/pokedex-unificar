@@ -1,12 +1,17 @@
+import React from "react";
 import { usePokemonContext } from "../contexts/usePokemonContext";
+import type { Pokemon } from "../../domain/entities/pokemon";
 
-function IconoFavoritos({ pokemon }) {
-  const { listaDreamTeam, meterAlDreamTeam } =
-    usePokemonContext();
+interface Props {
+  pokemon: Pokemon;
+}
 
-  const isDreamTeam = esDreamTeam(pokemon, listaDreamTeam);
+export default function IconoFavoritos({ pokemon }: Props) {
+  const { listaDreamTeam, meterAlDreamTeam } = usePokemonContext();
 
-  function manejarFavorito(e) {
+  const isDreamTeam = listaDreamTeam.some((p) => p.numero === pokemon.numero);
+
+  function manejarFavorito(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
 
@@ -25,9 +30,3 @@ function IconoFavoritos({ pokemon }) {
     </div>
   );
 }
-
-function esDreamTeam(pokemon, listaDreamTeam) {
-  return listaDreamTeam.some((p) => p.nombre === pokemon.nombre);
-}
-
-export default IconoFavoritos;

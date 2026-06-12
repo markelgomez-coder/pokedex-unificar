@@ -1,75 +1,74 @@
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState, useCallback } from "react";
 import { PokemonContext } from "./PokemonContext.js";
-import type { Pokemon } from "../../ts/tipos.js";
-import { pokemonRepository } from "../../infra/pokemonRepositoryFetch.js";
-import { dreamTeamStorage } from "../../infra/dreamTeamLocalStorage.js";
+import type { Pokemon } from "../../domain/entities/pokemon";
+import type { PokemonRepository } from "../../domain/ports/pokemonRepository";
+import type { DreamTeamStorage } from "../../domain/ports/storage";
+import {
+  cargarInicial,
+  persistirDreamTeam,
+  toggleDreamTeamList,
+} from "../../application/usecases/pokemonUsecases";
+import { obtenerPokemonDetalle } from "../../application/usecases/pokemonUsecases";
 
 interface PokemonProviderProps {
   children: ReactNode;
+  pokemonRepository: PokemonRepository;
+  dreamTeamStorage: DreamTeamStorage;
 }
 
-export function PokemonProvider({ children }: PokemonProviderProps) {
+export function PokemonProvider({
+  children,
+  pokemonRepository,
+  dreamTeamStorage,
+}: PokemonProviderProps) {
   const [listaPokemon, setListaPokemon] = useState<Pokemon[]>([]);
   const [listaDreamTeam, setListaDreamTeam] = useState<Pokemon[]>([]);
 
-const [inicializado, setInicializado] = useState(false);
+  const [inicializado, setInicializado] = useState(false);
 
-useEffect(() => {
-  void inicializar();
-}, []);
+  const inicializar = useCallback(async () => {
+    const { pokemons, dreamTeam } = await cargarInicial(
+      pokemonRepository,
+      dreamTeamStorage,
+    );
 
-useEffect(() => {
-  if (!inicializado) return;
+    setListaPokemon(pokemons);
+    setListaDreamTeam(dreamTeam);
 
-  const nombres = listaDreamTeam.map((pokemon) => pokemon.nombre);
+    setInicializado(true);
+  }, [pokemonRepository, dreamTeamStorage]);
 
-  dreamTeamStorage.set(nombres);
-}, [listaDreamTeam, inicializado]);
+  useEffect(() => {
+    void inicializar();
+  }, [inicializar]);
 
-async function inicializar() {
-  const pokemon = await pokemonRepository.obtenerTodos();
+  useEffect(() => {
+    if (!inicializado) return;
 
-  setListaPokemon(pokemon);
+    persistirDreamTeam(dreamTeamStorage, listaDreamTeam);
+  }, [listaDreamTeam, inicializado, dreamTeamStorage]);
 
-  const nombres = dreamTeamStorage.get();
-
-  const dreamTeam = nombres
-    ? pokemon.filter((p) => nombres.includes(p.nombre))
-    : [];
-
-  setListaDreamTeam(dreamTeam);
-
-  setInicializado(true);
-}
+  
 
   function meterAlDreamTeam(nuevo: Pokemon) {
-    setListaDreamTeam((prev) => {
-      const existe = prev.some((p) => p.nombre === nuevo.nombre);
+    setListaDreamTeam((prev) => toggleDreamTeamList(prev, nuevo));
+  }
 
-      if (existe) {
-        return prev.filter((pokemon) => pokemon.nombre !== nuevo.nombre);
-      } else if (!existe && prev.length < 6) {
-        return [...prev, nuevo];
-      }
-      return prev;
-    });
+  async function obtenerDetalle(nombre: string): Promise<Pokemon | null> {
+    return await obtenerPokemonDetalle(pokemonRepository, nombre);
   }
 
   return (
     <PokemonContext.Provider
       value={{
         listaPokemon,
-        setListaPokemon,
         listaDreamTeam,
         meterAlDreamTeam,
         inicializar,
+        obtenerPokemonDetalle: obtenerDetalle,
       }}
     >
       {children}
     </PokemonContext.Provider>
   );
-}
-
-async function obtenerListaPokemon(): Promise<Pokemon[]> {
-  return await pokemonRepository.obtenerTodos();
 }

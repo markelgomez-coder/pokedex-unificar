@@ -1,5 +1,6 @@
-import type { Pokemon } from "../../ts/tipos";
+import type { Pokemon } from "../entities/pokemon";
 
 export interface PokemonRepository {
   obtenerTodos(): Promise<Pokemon[]>;
+  obtenerPorNombre(nombre: string): Promise<Pokemon | null>;
 }

@@ -2,7 +2,7 @@ import "../../css/dream-team.css";
 
 import { usePokemonContext  } from "../contexts/usePokemonContext";
 
-import type { Pokemon } from "../../ts/tipos";
+import type { Pokemon } from "../../domain/entities/pokemon";
 
 function DreamTeam() {
 
@@ -41,7 +41,7 @@ const posiciones = [
 
             return (
               <img
-                key={p.nombre}
+                key={p.numero}
                 className="dream-team-grandes-img"
                 src={p.imagen}
                 style={{
@@ -59,7 +59,7 @@ const posiciones = [
 
         <div id="dream-team-pequenos" className="dream-team-pequenos">
           {dreamTeamPequeno.map((p: Pokemon) => (
-            <div key={p.nombre} className="dream-team-pequenos-container">
+            <div key={p.numero} className="dream-team-pequenos-container">
               <img
                 className="dream-team-pequenos-img"
                 src={p.imagen}
@@ -67,7 +67,7 @@ const posiciones = [
               />
 
               <div
-                id={p.nombre}
+                id={String(p.numero)}
                 className="eliminar-dream-team"
                 onClick={() => meterAlDreamTeam(p)}
               >

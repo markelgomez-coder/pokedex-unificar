@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { PokemonProvider } from "./presentation/contexts/PokemonProvider";
+import { pokemonRepository } from "./infra/pokemonRepositoryFetch";
+import { dreamTeamStorage } from "./infra/dreamTeamLocalStorage";
 
 import "./css/variables.css";
 import "./css/static.css";
@@ -39,7 +41,10 @@ function Layout({ children }: { children: React.ReactNode }) {
 
 function App() {
   return (
-    <PokemonProvider>
+    <PokemonProvider
+      pokemonRepository={pokemonRepository}
+      dreamTeamStorage={dreamTeamStorage}
+    >
       <BrowserRouter>
         <Layout>
           <Routes>

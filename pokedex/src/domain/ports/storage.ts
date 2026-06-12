@@ -1,4 +1,4 @@
 export interface DreamTeamStorage {
-  get(): string[] | null;
-  set(names: string[]): void;
+  get(): number[] | null;
+  set(ids: number[]): void;
 }

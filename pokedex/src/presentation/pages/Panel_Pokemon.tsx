@@ -6,8 +6,9 @@ import "../../css/static.css";
 import "../../css/pokedex.css";
 import "../../css/panel-pokemon.css";
 
-import type { Pokemon } from "../../ts/tipos";
-import * as funcionesAPI from "../../ts/funciones-API";
+import type { Pokemon } from "../../domain/entities/pokemon";
+import * as funcionesAPI from "../../infra/adapters/pokemonApi";
+import { usePokemonContext } from "../contexts/usePokemonContext";
 import CartaPokemon from "../components/CartaPokemon";
 
 type DanoPokemon = { name: string };
@@ -21,12 +22,13 @@ function Panel_Pokemon() {
   const [mitadDano, setMitadDano] = useState<DanoPokemon[]>([]);
   const [noDano, setNoDano] = useState<DanoPokemon[]>([]);
   const [evoluciones, setEvoluciones] = useState<Pokemon[]>([]);
+  const { obtenerPokemonDetalle } = usePokemonContext();
 
   useEffect(() => {
     if (!id) return;
 
     const cargarDatos = async () => {
-      const poke = await funcionesAPI.obtenerPokemon(id);
+      const poke = await obtenerPokemonDetalle(id ?? "");
       setPokemon(poke);
 
       const [
@@ -59,8 +61,8 @@ function Panel_Pokemon() {
       setEvoluciones(evolucionesCompletas);
     };
 
-    cargarDatos();
-  }, [id]);
+    void cargarDatos();
+  }, [id, obtenerPokemonDetalle]);
 
   const renderDano = (lista: DanoPokemon[]) =>
     lista.map((d) => (

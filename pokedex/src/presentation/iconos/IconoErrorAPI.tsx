@@ -1,4 +1,4 @@
-function IconoErrorAPI() {
+export default function IconoErrorAPI() {
   return (
     <>
       <div className="icono-error-api-pokemon">
@@ -11,5 +11,3 @@ function IconoErrorAPI() {
     </>
   );
 }
-
-export default IconoErrorAPI;

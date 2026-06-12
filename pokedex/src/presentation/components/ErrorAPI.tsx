@@ -1,6 +1,6 @@
-import IconoErrorAPI from "../iconos/IconoErrorAPI.jsx";
+import IconoErrorAPI from "../iconos/IconoErrorAPI";
 
-function ErrorAPI() {
+export default function ErrorAPI() {
   return (
     <>
       <div className="error-api-pokemon">
@@ -14,5 +14,3 @@ function ErrorAPI() {
     </>
   );
 }
-
-export default ErrorAPI;

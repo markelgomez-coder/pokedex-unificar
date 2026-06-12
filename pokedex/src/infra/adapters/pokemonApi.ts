@@ -4,9 +4,9 @@ import type {
   DanoPokemon,
   FlavorTextEntry,
   EvolutionNode,
-} from "./tipos";
+} from "../../domain/entities/pokemon";
 
-import { hacerFetch } from "./fetch";
+import { hacerFetch } from "../http/fetch";
 
 export async function obtenerPokemon(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;

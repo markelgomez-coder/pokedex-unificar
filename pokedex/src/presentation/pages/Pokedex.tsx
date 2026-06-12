@@ -8,10 +8,10 @@ import { usePokemonContext } from "../contexts/usePokemonContext";
 import ErrorAPI from "../components/ErrorAPI";
 import NoHayResultado from "../components/NoHayResultado";
 import CartaPokemonVacia from "../components/CartaPokemonVacia";
-import * as funcionesPokedex from "../../ts/pokedex";
+import * as funcionesPokedex from "../../application/services/pokedexService";
 import CartaPokemon from "../components/CartaPokemon";
 
-import type { Pokemon } from "../../ts/tipos";
+import type { Pokemon } from "../../domain/entities/pokemon";
 
 function Pokedex() {
   const [busqueda, setBusqueda] = useState("");

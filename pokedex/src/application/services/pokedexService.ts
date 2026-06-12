@@ -1,10 +1,10 @@
-import * as funcionesGenerales from "./funciones-generales";
+import * as funcionesGenerales from "./pokemonService";
 
-import type { Pokemon } from "./tipos";
+import type { Pokemon } from "../../domain/entities/pokemon";
 
 export function filtrarPokemons(value: string, listaPokemon: Pokemon[]) {
   if (value === "") {
-    return  listaPokemon;
+    return listaPokemon;
   } else {
     const tipoDato = funcionesGenerales.sacarTipoDato(value);
     switch (tipoDato) {
