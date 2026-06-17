@@ -8,11 +8,14 @@ h2 {
 
   align-self: center;
   justify-self: center;
+  margin-bottom: 25px;
 }
 
 img {
-  width: 250px;
+  width: 350px;
   height: auto;
+  margin: 10px;
+
 }
 
 .home{
@@ -29,9 +32,22 @@ img {
 
     width: 100%;
     height: calc(100% - 84px);
+    gap: 25px;
 }
 
 .home-buttons-panel p{
       align-self: center;
       justify-self: center;
+      color: black;
+}
+
+.home-button{
+    border: 3px solid var(--color-brand-200);
+    border-radius: 100%;
+    padding: 10px;
+}
+
+#imagen-home-dreamTeam{
+  border-radius: 100%;
+
 }

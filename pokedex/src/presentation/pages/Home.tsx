@@ -22,7 +22,7 @@ function Home() {
             id="home-dreamTeam"
             className="home-button"
           >
-            <img src={imagenDreamTeam} alt="Pokeball" />
+            <img src={imagenDreamTeam} alt="Pokeball" id="imagen-home-dreamTeam" />
             <p>Dream Team</p>
           </Link>
         </div>
