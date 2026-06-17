@@ -31,7 +31,7 @@ img {
     flex-wrap: wrap;
 
     width: 100%;
-    height: calc(100% - 84px);
+    height: calc(100% - 84px - 75px);
     gap: 25px;
 }
 
@@ -47,7 +47,12 @@ img {
     padding: 10px;
 }
 
+.home-button:hover{
+    border: 4px solid var(--color-brand-300);
+    cursor: pointer;
+    background-color: var(--color-brand-100);
+}
+
 #imagen-home-dreamTeam{
   border-radius: 100%;
-
 }
