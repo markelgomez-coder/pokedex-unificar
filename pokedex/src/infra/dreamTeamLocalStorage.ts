@@ -1,6 +1,5 @@
 import type { DreamTeamStorage } from "../domain/ports/storage";
 
-// Versioned storage format: { version: number, data: string[] }
 const STORAGE_KEY = "dream-team";
 const CURRENT_VERSION = 1;
 
@@ -11,7 +10,6 @@ export const dreamTeamStorage: DreamTeamStorage = {
     try {
       const parsed = JSON.parse(v);
       if (parsed && typeof parsed === "object") {
-        // backward compat: if stored as raw array of numbers
         if (Array.isArray(parsed) && parsed.every((x) => typeof x === "number"))
           return parsed;
 

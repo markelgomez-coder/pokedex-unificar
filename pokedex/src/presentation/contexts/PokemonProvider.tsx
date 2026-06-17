@@ -39,7 +39,7 @@ export function PokemonProvider({
   }, [pokemonRepository, dreamTeamStorage]);
 
   useEffect(() => {
-    void inicializar();
+    void Promise.resolve().then(() => inicializar());
   }, [inicializar]);
 
   useEffect(() => {
