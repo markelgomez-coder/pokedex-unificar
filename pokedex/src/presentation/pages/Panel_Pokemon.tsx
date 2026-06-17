@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../../css/variables.css";
 import "../../css/static.css";
-import "../../css/static.css";
 import "../../css/pokedex.css";
 import "../../css/panel-pokemon.css";
 
