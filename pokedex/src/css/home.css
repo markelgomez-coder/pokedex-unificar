@@ -11,28 +11,28 @@ h2 {
   margin-bottom: 25px;
 }
 
-img {
-  width: 350px;
+.home img {
+  width: min(350px, 45vw);
+  max-width: 100%;
   height: auto;
   margin: 10px;
-
 }
 
 .home{
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  min-height: calc(100vh - 80px - 64px);
 }
 
 .home-buttons-panel{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
 
-    width: 100%;
-    height: calc(100% - 84px - 75px);
-    gap: 25px;
+  width: 100%;
+  gap: 25px;
+  padding-bottom: 80px;
 }
 
 .home-buttons-panel p{
