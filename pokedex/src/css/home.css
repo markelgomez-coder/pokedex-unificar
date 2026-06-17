@@ -1,0 +1,8 @@
+
+h2 {
+  font-family: "Pokemon-solid", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+
+  font-size: var(--font-size-mobile-headline);
+}

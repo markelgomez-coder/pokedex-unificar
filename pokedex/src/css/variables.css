@@ -1,16 +1,16 @@
 @font-face {
   font-family: "Pokemon-solid";
-  src: url("../fonts/Pokemon Solid.ttf") format("truetype");
+  src: url("../font/Pokemon-Solid.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Pokemon-hollow";
-  src: url("../fonts/Pokemon Hollow.ttf") format("truetype");
+  src: url("../font/Pokemon-Hollow.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Coolvetica";
-  src: url("../fonts/Coolvetica Rg.otf") format("opentype");
+  src: url("../font/Coolvetica-Rg.otf") format("opentype");
 }
 
 :root {
