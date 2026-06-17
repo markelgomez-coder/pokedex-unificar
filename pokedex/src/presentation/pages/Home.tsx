@@ -1,19 +1,32 @@
 import "../../css/home.css";
+import imagenPokedex from "../../img/home-pokedex.png";
+import imagenDreamTeam from "../../img/home-dreamteam.png";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
     <>
-      <h2>Pokemon</h2>
-      <p>
-        Welcome to the Pokedex! This is your ultimate guide to all things
-        Pokémon. Here, you can explore detailed information about every Pokémon
-        species, including their types, abilities, evolutions, and much more.
-        Whether you're a seasoned trainer or just starting your Pokémon journey,
-        the Pokédex is your go-to resource for learning about the fascinating
-        world of Pokémon. Dive in and discover the unique characteristics of
-        each Pokémon, their habitats, and how they interact with one another.
-        Happy exploring!
-      </p>
+      <div className="home">
+        <h2>Pokemon</h2>
+        <div className="home-buttons-panel">
+          <Link
+            to={`/pokedex/`}
+            id="home-pokedex"
+            className="home-button"
+          >
+            <img src={imagenPokedex} alt="Pokeball" />
+            <p>Pokedex</p>
+          </Link>
+          <Link
+            to={`/dream-team/`}
+            id="home-dreamTeam"
+            className="home-button"
+          >
+            <img src={imagenDreamTeam} alt="Pokeball" />
+            <p>Dream Team</p>
+          </Link>
+        </div>
+      </div>
     </>
   );
 }
