@@ -1,7 +1,7 @@
 .dream-team {
-  width: 100%;
-  height: 100%;
-  
+  width: 95%;
+  height: 65vh;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,11 +10,212 @@
 .dream-team-interior {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
-  width: 80%;
-  height: 80%;
+  width: calc(80vw + 4px);
+  height: 65vh;
   border: 2px solid var(--color-brand-900);
   border-radius: 50px;
+
+  background-color: antiquewhite;
+}
+
+.pokemon-dream-team-tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 13.333vw;
+  height: 100%;
+}
+.pokemon-dream-team-tarjeta:first-child {
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+.pokemon-dream-team-tarjeta:nth-child(6) {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.pokemon-dream-team-titulo {
+  color: black;
+  align-self: center;
+  justify-self: center;
+  margin-top: 10px;
+  letter-spacing: 2px;
+  font-size: 14px;
+
+  font-family: "Pokemon-Solid", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+  height: auto;
+}
+
+.pokemon-dream-team-imagen {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+}
+
+.pokemon-dream-team-imagen img {
+  width: 100%;
+}
+
+.pokemon-dream-team-tipos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.pokemon-dream-team-tipo {
+  display: flex;
+  color: black;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.estadisticas-pokemon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
+.estadistica-pokemon {
+  color: black;
+  width: 100%;
+  text-align: center;
+}
+
+.puntos-totales-pokemon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.puntos-totales-pokemon .nombre {
+  font-family: "Coolvetica-Rg", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  width: 100%;
+  color: black;
+  text-align: center;
+}
+
+.puntos-totales-pokemon .numero {
+  font-family: "Pokemon-Solid", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  width: 100%;
+  color: black;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.eliminar-del-dream-team {
+  display: flex;
+  margin-top: 10px;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
+
+.button-eliminar-del-dream-team  {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: auto;
+  color: black;
+  font-weight: bold;
+  background-color: rgb(245, 124, 122);
+  border: 2px solid red;
+  border-radius: 20px;
+}
+
+.button-eliminar-del-dream-team:hover{
+  background-color: red;
+  border: 2px solid rgb(245, 124, 122);;
+}
+
+.grass {
+  background-color: var(--color-grass);
+  border: 1px solid color-mix(in srgb, var(--color-grass) 55%, black);
+}
+.bug {
+  background-color: var(--color-bug);
+  border: 1px solid color-mix(in srgb, var(--color-bug) 75%, black);
+}
+.electric {
+  background-color: var(--color-electric);
+  border: 1px solid color-mix(in srgb, var(--color-electric) 75%, black);
+}
+.ground {
+  background-color: var(--color-ground);
+  border: 1px solid color-mix(in srgb, var(--color-ground) 75%, black);
+}
+.fire {
+  background-color: var(--color-fire);
+  border: 1px solid color-mix(in srgb, var(--color-fire) 75%, black);
+}
+.fighting {
+  background-color: var(--color-fighting);
+  border: 1px solid color-mix(in srgb, var(--color-fighting) 75%, black);
+}
+.poison {
+  background-color: var(--color-poison);
+  border: 1px solid color-mix(in srgb, var(--color-poison) 75%, black);
+}
+.psychic {
+  background-color: var(--color-psychic);
+  border: 1px solid color-mix(in srgb, var(--color-psychic) 75%, black);
+}
+.fairy {
+  background-color: var(--color-fairy);
+  border: 1px solid color-mix(in srgb, var(--color-fairy) 75%, black);
+}
+.dragon {
+  background-color: var(--color-dragon);
+  border: 1px solid color-mix(in srgb, var(--color-dragon) 75%, black);
+}
+.flying {
+  background-color: var(--color-flying);
+  border: 1px solid color-mix(in srgb, var(--color-flying) 75%, black);
+}
+.ghost {
+  background-color: var(--color-ghost);
+  border: 1px solid color-mix(in srgb, var(--color-ghost) 75%, black);
+}
+.water {
+  background-color: var(--color-water);
+  border: 1px solid color-mix(in srgb, var(--color-water) 75%, black);
+}
+.ice {
+  background-color: var(--color-ice);
+  border: 1px solid color-mix(in srgb, var(--color-ice) 75%, black);
+}
+.normal {
+  background-color: var(--color-normal);
+  border: 1px solid color-mix(in srgb, var(--color-normal) 75%, black);
+}
+.rock {
+  background-color: var(--color-rock);
+  border: 1px solid color-mix(in srgb, var(--color-rock) 75%, black);
+}
+.steel {
+  background-color: var(--color-steel);
+  border: 1px solid color-mix(in srgb, var(--color-steel) 75%, black);
+}
+.dark {
+  background-color: var(--color-dark);
+  border: 1px solid color-mix(in srgb, var(--color-dark) 75%, black);
 }
