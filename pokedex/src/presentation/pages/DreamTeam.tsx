@@ -3,6 +3,7 @@ import "../../css/variables.css";
 import "../../css/static.css";
 
 import DreamTeamPokemon from "../components/DreamTeamPokemon";
+import DreamTeamVacio from "../components/DreamTeamVacio"
 import { usePokemonContext } from "../contexts/usePokemonContext";
 import type { Pokemon } from "../../domain/entities/pokemon";
 import { Link } from "react-router-dom";
@@ -27,9 +28,20 @@ function DreamTeam() {
 }
 
 function ponerFavoritos(lista: Pokemon[]) {
-  return lista.map((pokemon) => (
-    <DreamTeamPokemon key={pokemon.nombre} pokemon={pokemon} />
-  ));
+  return Array.from({ length: 6 }, (_, index) => {
+    const pokemon = lista[index];
+
+    return pokemon ? (
+      <DreamTeamPokemon
+        key={`pokemon-${pokemon.numero}`}
+        pokemon={pokemon}
+      />
+    ) : (
+      <DreamTeamVacio
+        key={`vacio-${index}`}
+      />
+    );
+  });
 }
 
 export default DreamTeam;

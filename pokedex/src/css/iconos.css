@@ -454,3 +454,53 @@
     left: calc(269px / 2 + 27px);
   }
 }
+
+.icono-agregar-dream-team {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.icono-agregar-dream-team-circulo {
+  background-color: antiquewhite;
+  border-radius: 50%;
+  border: 1px solid gray;
+  width: 50px;
+  height: 50px;
+}
+
+.icono-agregar-dream-team-vertical {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: rgb(234, 202, 139);
+  border: 1px solid gray;
+  width: 6px;
+  height: 30px;
+  border-radius: 3px;
+}
+
+.icono-agregar-dream-team-horizontal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: rgb(234, 202, 139);
+  border: 1px solid gray;
+  width: 30px;
+  height: 6px;
+  border-radius: 3px;
+}
+
+.icono-agregar-dream-team-arreglo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  background-color: rgb(234, 202, 139);
+  width: 6px;
+  height: 6px;
+}
