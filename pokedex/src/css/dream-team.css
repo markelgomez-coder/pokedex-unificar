@@ -1,6 +1,6 @@
 .dream-team {
   width: 95%;
-  height: 65vh;
+  height: auto;
 
   display: flex;
   align-items: center;
@@ -13,7 +13,7 @@
   justify-content: flex-start;
 
   width: calc(80vw + 4px);
-  height: 65vh;
+  height: auto;
   border: 2px solid var(--color-brand-900);
   border-radius: 50px;
 
@@ -26,6 +26,7 @@
   gap: 5px;
   width: 13.333vw;
   height: 100%;
+  padding-bottom: 10px;
 }
 .pokemon-dream-team-tarjeta:first-child {
   border-top-left-radius: 50px;
@@ -158,7 +159,7 @@
 }
 
 .jugar-dream-team-button {
-  width: 20%;
+  width:150px;
   padding: 10px;
   border-radius: 50px;
   border: 3px solid black;
@@ -168,10 +169,10 @@
 .jugar-dream-team-button:hover {
   border: 3px solid black;
   background-color: rgb(224, 179, 120);
-  transform: translate(5px,-5px);
+  transform: translate(5px, -5px);
 }
 
-.jugar-dream-team-button p{
+.jugar-dream-team-button p {
   color: black;
   font-family: "Pokemon-Solid", sans-serif;
   font-style: normal;
@@ -252,4 +253,39 @@
 .dark {
   background-color: var(--color-dark);
   border: 1px solid color-mix(in srgb, var(--color-dark) 75%, black);
+}
+
+@media (max-width: 935px) {
+  .dream-team-interior {
+    display: flex;
+    flex-wrap: wrap;
+    
+  }
+
+  .pokemon-dream-team-tarjeta {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 26.666vw;
+    height: 50%;
+    padding-bottom: 10px;
+  }
+  .pokemon-dream-team-tarjeta:first-child {
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 0px;
+  }
+  .pokemon-dream-team-tarjeta:nth-child(3) {
+    border-top-right-radius: 50px;
+  }
+  .pokemon-dream-team-tarjeta:nth-child(4) {
+    border-bottom-left-radius: 50px;
+  }
+  .pokemon-dream-team-tarjeta:nth-child(6) {
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 0px;
+  }
+
+  .jugar-dream-team{
+    padding-bottom: 85px;
+  }
 }
