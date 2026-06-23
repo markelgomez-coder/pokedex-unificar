@@ -366,3 +366,15 @@ a:hover {
     width: 100%;
   }
 }
+
+@media (max-width: 457px) {
+  main{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .buscador {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
