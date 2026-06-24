@@ -6,6 +6,7 @@ import { dreamTeamStorage } from "./infra/dreamTeamLocalStorage";
 import "./css/variables.css";
 import "./css/static.css";
 import "./css/iconos.css";
+import "./css/error.css"
 
 import Pokeball from "./presentation/iconos/Pokeball";
 
@@ -13,6 +14,7 @@ import Home from "./presentation/pages/Home";
 import Pokedex from "./presentation/pages/Pokedex";
 import DreamTeam from "./presentation/pages/DreamTeam";
 import Panel_Pokemon from "./presentation/pages/Panel_Pokemon";
+import Combate from "./presentation/pages/Combate";
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -52,6 +54,7 @@ function App() {
             <Route path="/pokedex" element={<Pokedex />} />
             <Route path="/dream-team" element={<DreamTeam />} />
             <Route path="/panel-pokemon/:id" element={<Panel_Pokemon />} />
+            <Route path="/combate/" element={<Combate />} />
           </Routes>
         </Layout>
       </BrowserRouter>

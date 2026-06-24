@@ -3,16 +3,30 @@ import "../../css/variables.css";
 import "../../css/static.css";
 
 import DreamTeamPokemon from "../components/DreamTeamPokemon";
-import DreamTeamVacio from "../components/DreamTeamVacio"
+import DreamTeamVacio from "../components/DreamTeamVacio";
 import { usePokemonContext } from "../contexts/usePokemonContext";
 import type { Pokemon } from "../../domain/entities/pokemon";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 
 function DreamTeam() {
   const { listaDreamTeam } = usePokemonContext();
 
+  const location = useLocation();
+
+  const error = location.state?.error;
+
+  const [showError, setShowError] = useState(true);
+
   return (
     <>
+      {error && showError && (
+        <div className="popup-error">
+          {error}
+          <button onClick={() => setShowError(false)}>Cerrar</button>
+        </div>
+      )}
+      
       <div className="dream-team">
         <div className="dream-team-interior">
           {ponerFavoritos(listaDreamTeam)}
@@ -32,14 +46,9 @@ function ponerFavoritos(lista: Pokemon[]) {
     const pokemon = lista[index];
 
     return pokemon ? (
-      <DreamTeamPokemon
-        key={`pokemon-${pokemon.numero}`}
-        pokemon={pokemon}
-      />
+      <DreamTeamPokemon key={`pokemon-${pokemon.numero}`} pokemon={pokemon} />
     ) : (
-      <DreamTeamVacio
-        key={`vacio-${index}`}
-      />
+      <DreamTeamVacio key={`vacio-${index}`} />
     );
   });
 }
