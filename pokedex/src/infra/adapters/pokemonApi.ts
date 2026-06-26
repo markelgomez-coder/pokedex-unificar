@@ -6,6 +6,7 @@ import type {
   EvolutionNode,
   PokemonCombate,
   StatChangeAPI,
+  MovimientoCombate,
 } from "../../domain/entities/pokemon";
 
 import { hacerFetch } from "../http/fetch";
@@ -308,4 +309,87 @@ export async function calcularMultiplicadorTipo(
   }
 
   return multiplier;
+}
+
+// Función para obtener el multiplicador de dificultad
+export function obtenerModificadorDificultad(
+  dificultad: string,
+  esAtaqueCPU: boolean,
+): number {
+  const modificadores: Record<string, { usuario: number; cpu: number }> = {
+    facil: { usuario: 1.3, cpu: 0.7 },
+    medio: { usuario: 1, cpu: 1 },
+    dificil: { usuario: 0.7, cpu: 1.3 },
+    imposible: { usuario: 0.5, cpu: 1.5 },
+  };
+
+  const mod = modificadores[dificultad] || modificadores.medio;
+  return esAtaqueCPU ? mod.cpu : mod.usuario;
+}
+
+// Función para calcular daño de un ataque
+export function calcularDano(
+  ataque: number,
+  defensa: number,
+  potencia: number | null,
+  multiplicadorTipo: number,
+  dificultad: string,
+  esAtaqueCPU: boolean,
+): number {
+  // Si el movimiento no tiene potencia (status move), no hace daño
+  if (!potencia || potencia === 0) return 0;
+
+  // Fórmula simplificada de daño Pokémon
+  const danoBase = ((2 * ataque) / 5 + 2) * potencia * (ataque / defensa) / 50 + 2;
+
+  // Aplicar multiplicador de tipo
+  let dano = danoBase * multiplicadorTipo;
+
+  // Variación aleatoria (85-100%)
+  const variacion = 0.85 + Math.random() * 0.15;
+  dano = dano * variacion;
+
+  // Aplicar modificador de dificultad
+  const modificador = obtenerModificadorDificultad(dificultad, esAtaqueCPU);
+  dano = Math.floor(dano * modificador);
+
+  return Math.max(1, dano); // Mínimo 1 de daño
+}
+
+// Función para elegir un movimiento para la CPU
+export function elegirMovimientoCPU(
+  movimientos: MovimientoCombate[],
+  debilidadesOponente: string[],
+): MovimientoCombate {
+  // Preferir movimientos que golpeen debilidades del oponente
+  const movimientosDebilidad = movimientos.filter(
+    (m) =>
+      m.potencia !== null &&
+      debilidadesOponente.includes(m.tipo),
+  );
+
+  if (movimientosDebilidad.length > 0) {
+    return movimientosDebilidad[
+      Math.floor(Math.random() * movimientosDebilidad.length)
+    ];
+  }
+
+  // Si no hay debilidades, preferir movimientos que hagan daño
+  const movimientosDano = movimientos.filter((m) => m.potencia !== null);
+
+  if (movimientosDano.length > 0) {
+    return movimientosDano[
+      Math.floor(Math.random() * movimientosDano.length)
+    ];
+  }
+
+  // Si todo falla, elegir cualquier movimiento
+  return movimientos[Math.floor(Math.random() * movimientos.length)];
+}
+
+// Función para obtener tipos de un Pokémon para el combate
+export async function obtenerTiposParaCombate(id: string) {
+  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+  const data = await hacerFetch(url);
+  return data.types.map((t: TipoPokemon) => t.type.name);
 }
